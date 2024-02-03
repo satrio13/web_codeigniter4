@@ -1,0 +1,30 @@
+{
+    "name": "kusmantopratama/ci4datatables",
+    "type": "library",
+    "description": "Simple Codeigniter 4 Library Serverside Datatables Inspired igniteddatatables and Laravel Yajra Datatables",
+    "keywords": ["ci4", "codeigniter", "codeigntier 4", "ci 4", "datatables", "serverside", "serverside datatables"],
+    "homepage": "https://www.youtube.com/channel/UCayxI4iWN0iskWquK9qNqiw",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kusmanto Pratama",
+            "email": "putraradityapratama@gmail.com",
+            "homepage": "https://www.youtube.com/channel/UCayxI4iWN0iskWquK9qNqiw",
+            "role": "Developer"
+        }
+    ],
+	"require": {
+		"php": ">=7.2",
+		"codeigniter4/framework": "^4"
+	},
+	"autoload": {
+		"psr-4": {
+			"Kusmantopratama\\Ci4datatables\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Kusmantopratama\\Ci4datatables\\": "src"
+		}
+	}
+}

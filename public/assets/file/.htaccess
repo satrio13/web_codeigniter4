@@ -1,0 +1,7 @@
+php_flag engine off
+
+<FilesMatch "\.(?:inc|php|py|rb|js|html)$">
+
+ deny from all
+
+</FilesMatch>
