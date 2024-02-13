@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-md-2 text-bold">PROFIL</div>
-                                    <div class="col-md-10">: <?= $data->profil; ?></div>
+                                    <div class="col-md-10">: <?= htmlspecialchars_decode($data->profil); ?></div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-md-2 text-bold">ALAMAT</div>

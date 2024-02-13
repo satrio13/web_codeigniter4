@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\Admin\AlumniModel;
 use App\Models\Admin\IsiAlumniModel;
+use App\Models\Admin\TahunModel;
 
 class Alumni extends BaseController
 {
@@ -12,6 +13,7 @@ class Alumni extends BaseController
     {   
         $this->m_alumni = new AlumniModel();
         $this->m_isialumni = new IsiAlumniModel();
+        $this->m_tahun = new TahunModel();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -25,7 +27,7 @@ class Alumni extends BaseController
     public function tambah_alumni()
     {
         $data['title'] = 'Tambah Alumni';
-        $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+        $data['tahun'] = $this->m_tahun->list_tahun();
         return view('admin/alumni/form_tambah', $data);
     }
 
@@ -67,7 +69,7 @@ class Alumni extends BaseController
         {
             $data['title'] = 'Edit Alumni';
             $data['data'] = $this->m_alumni->get_alumni($id);
-            $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+            $data['tahun'] = $this->m_tahun->list_tahun();
             return view('admin/alumni/form_edit', $data);
         }else
         {

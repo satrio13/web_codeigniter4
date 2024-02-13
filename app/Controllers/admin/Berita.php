@@ -29,10 +29,10 @@ class Berita extends BaseController
     public function simpan_berita()
     {
         $this->rules->setRules([
-            'nama' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
+            'nama' => ['label' => 'Nama', 'rules' => 'required|min_length[100]'],
             'isi' =>  ['label' => 'Isi', 'rules' => 'required'],
             'is_active' =>  ['label' => 'Status', 'rules' => 'required'],
-            //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
+            //'gambar' => ['label' => 'Gambar', 'rules' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]'],
         ]);
         
         if(!$this->rules->withRequest($this->request)->run())

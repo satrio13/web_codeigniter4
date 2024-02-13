@@ -274,6 +274,9 @@ $statusguru = old('statusguru') ?? $data->statusguru;
                                 <label class="col-sm-2 col-form-label">EMAIL</label>
                                 <div class="col-sm-5">
                                     <input type="email" name="email" maxlength="100" value="<?= old('email', $data->email); ?>" class="form-control" placeholder="EMAIL">
+                                    <small class="text-danger">
+                                        <?= (session()->has('validation')) ? session('validation')->getError('email') : '' ?>
+                                    </small> 
                                 </div>
                             </div>
                             <div class="form-group row">

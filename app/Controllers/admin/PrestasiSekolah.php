@@ -4,12 +4,14 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\PrestasiSekolahModel;
+use App\Models\Admin\TahunModel;
 
 class PrestasiSekolah extends BaseController
 {
     function __construct()
     {   
         $this->m_prestasi_sekolah = new PrestasiSekolahModel();
+        $this->m_tahun = new TahunModel();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -23,7 +25,7 @@ class PrestasiSekolah extends BaseController
     public function tambah_prestasi_sekolah()
     {
         $data['title'] = 'Tambah Prestasi Sekolah';
-        $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+        $data['tahun'] = $this->m_tahun->list_tahun();
         return view('admin/prestasi_sekolah/form_tambah', $data);
     }
 
@@ -35,7 +37,6 @@ class PrestasiSekolah extends BaseController
             'nama' =>  ['label' => 'Nama Lomba', 'rules' => 'required|max_length[100]'],
             'prestasi' =>  ['label' => 'Prestasi', 'rules' => 'required|max_length[100]'],
             'tingkat' =>  ['label' => 'Tingkat', 'rules' => 'required|numeric'],
-            'jenis' =>  ['label' => 'Jenis', 'rules' => 'required|numeric'],
             'keterangan' =>  ['label' => 'Keterangan', 'rules' => 'max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
@@ -82,7 +83,7 @@ class PrestasiSekolah extends BaseController
         {
             $data['title'] = 'Edit Prestasi Sekolah';
             $data['data'] = $this->m_prestasi_sekolah->get_prestasi_sekolah($id);
-            $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+            $data['tahun'] = $this->m_tahun->list_tahun();
             return view('admin/prestasi_sekolah/form_edit', $data);
         }else
         {
@@ -98,7 +99,6 @@ class PrestasiSekolah extends BaseController
             'nama' =>  ['label' => 'Nama Lomba', 'rules' => 'required|max_length[100]'],
             'prestasi' =>  ['label' => 'Prestasi', 'rules' => 'required|max_length[100]'],
             'tingkat' =>  ['label' => 'Tingkat', 'rules' => 'required|numeric'],
-            'jenis' =>  ['label' => 'Jenis', 'rules' => 'required|numeric'],
             'keterangan' =>  ['label' => 'Keterangan', 'rules' => 'max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);

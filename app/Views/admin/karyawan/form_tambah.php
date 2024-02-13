@@ -247,6 +247,9 @@
                                 <label class="col-sm-2 col-form-label">EMAIL</label>
                                 <div class="col-sm-5">
                                     <input type="email" name="email" maxlength="100" value="<?= set_value('email'); ?>" class="form-control" placeholder="EMAIL">
+                                    <small class="text-danger">
+                                        <?= (session()->has('validation')) ? session('validation')->getError('email') : '' ?>
+                                    </small> 
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -265,7 +268,7 @@
                         </div>
                         <div class="card-footer">
                             <button type="submit" name="submit" value="Submit" class="btn btn-primary btn-sm" onclick="return VerifyUploadSizeIsOK()"><i class="fa fa-check"></i> SIMPAN</button>
-                            <a href="<?= base_url('backend/guru'); ?>" class="btn btn-danger btn-sm float-right"><i class="fa fa-arrow-left"></i> BATAL</a>
+                            <a href="<?= base_url('backend/karyawan'); ?>" class="btn btn-danger btn-sm float-right"><i class="fa fa-arrow-left"></i> BATAL</a>
                         </div>
                         <?php echo form_close() ?>
                     </div>

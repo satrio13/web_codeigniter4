@@ -47,7 +47,7 @@ class User extends BaseController
                 'username' =>  ['label' => 'Username', 'rules' => 'required|trim|alpha_numeric|min_length[5]|max_length[30]|is_unique[tb_user.username]'],
                 'password1' => ['label' => 'Password', 'rules' => 'required|trim|alpha_numeric|min_length[5]|max_length[30]'],
                 'password2' => ['label' => 'Konfirmasi Password', 'rules' => 'required|trim|alpha_numeric|min_length[5]|max_length[30]|matches[password1]'],
-                'email' =>  ['label' => 'Email', 'rules' => 'required|trim|max_length[100]|is_unique[tb_user.email]'],
+                'email' =>  ['label' => 'Email', 'rules' => 'required|trim|valid_email|max_length[100]|is_unique[tb_user.email]'],
                 'is_active' =>  ['label' => 'Status', 'rules' => 'required|numeric'],
             ]);
             
@@ -119,7 +119,7 @@ class User extends BaseController
                     'password' => ['label' => 'Password', 'rules' => 'trim|alpha_numeric|min_length[5]|max_length[30]'],
                     'email' =>  [
                         'label' => 'Email', 
-                        'rules' => 'required|trim|max_length[100]|cek_email['.$id.']',
+                        'rules' => 'required|trim|valid_email|max_length[100]|cek_email['.$id.']',
                         'errors' => [
                             'cek_email' => 'Email already exist'
                         ]
@@ -238,7 +238,7 @@ class User extends BaseController
             ],
             'email' =>  [
                 'label' => 'Email', 
-                'rules' => 'required|trim|max_length[100]|cek_email['.$id.']',
+                'rules' => 'required|trim|valid_email|max_length[100]|cek_email['.$id.']',
                 'errors' => [
                     'cek_email' => 'Email already exist'
                 ]

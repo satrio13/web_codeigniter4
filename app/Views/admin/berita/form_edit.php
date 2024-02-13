@@ -89,13 +89,13 @@ $is_active = old('is_active') ?? $data->is_active;
                                 </div>
                                 <div class="form-group row">
                                     <div class="offset-sm-2 col-sm-10">
-                                    <span class="text-danger"><b>*</b></span>) Field Wajib Diisi
+                                        <span class="text-danger"><b>*</b></span>) Field Wajib Diisi
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                            <button type="submit" name="submit" value="Submit" class="btn btn-primary btn-sm" onclick="return VerifyUploadSizeIsOK()"><i class="fa fa-check"></i> SIMPAN</button>
-                            <a href="<?= base_url('backend/berita'); ?>" class="btn btn-danger btn-sm float-right"><i class="fa fa-arrow-left"></i> BATAL</a>
+                                <button type="submit" name="submit" value="Submit" class="btn btn-primary btn-sm" onclick="return VerifyUploadSizeIsOK()"><i class="fa fa-check"></i> SIMPAN</button>
+                                <a href="<?= base_url('backend/berita'); ?>" class="btn btn-danger btn-sm float-right"><i class="fa fa-arrow-left"></i> BATAL</a>
                             </div>
                         <?php echo form_close() ?>
                     </div>

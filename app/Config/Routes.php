@@ -122,6 +122,7 @@ $routes->post('backend/simpan-guru', 'admin\Guru::simpan_guru');
 $routes->get('backend/edit-guru/(:num)', 'admin\Guru::edit_guru/$1');
 $routes->put('backend/update-guru/(:num)', 'admin\Guru::update_guru/$1');
 $routes->get('backend/hapus-guru/(:num)', 'admin\Guru::hapus_guru/$1');
+$routes->get('backend/lihat-guru/(:num)', 'admin\Guru::lihat_guru/$1');
 $routes->post('backend/get_data_guru', 'admin\Guru::get_data_guru'); //end guru
 $routes->get('backend/karyawan', 'admin\Karyawan::index'); // start karyawan
 $routes->get('backend/tambah-karyawan', 'admin\Karyawan::tambah_karyawan');
@@ -129,6 +130,7 @@ $routes->post('backend/simpan-karyawan', 'admin\Karyawan::simpan_karyawan');
 $routes->get('backend/edit-karyawan/(:num)', 'admin\Karyawan::edit_karyawan/$1');
 $routes->put('backend/update-karyawan/(:num)', 'admin\Karyawan::update_karyawan/$1');
 $routes->get('backend/hapus-karyawan/(:num)', 'admin\Karyawan::hapus_karyawan/$1');
+$routes->get('backend/lihat-karyawan/(:num)', 'admin\Karyawan::lihat_karyawan/$1');
 $routes->post('backend/get_data_karyawan', 'admin\Karyawan::get_data_karyawan'); //end karyawan
 $routes->get('backend/alumni', 'admin\Alumni::index'); // start alumni
 $routes->get('backend/tambah-alumni', 'admin\Alumni::tambah_alumni');

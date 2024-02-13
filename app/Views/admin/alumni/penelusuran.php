@@ -210,7 +210,7 @@
                         <?= csrf_field() ?>
                         <input type="hidden" value="" name="id" id="id"> 
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">STATUS *</label>
+                            <label class="col-md-3 col-form-label">STATUS <span class="text-danger">*</span></label>
                             <div class="col-md-9">
                                 <select name="status" class="form-control" id="status">
                                     <option value="0">Menunggu</option>

@@ -4,12 +4,14 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\PrestasiGuruModel;
+use App\Models\Admin\TahunModel;
 
 class PrestasiGuru extends BaseController
 {
     function __construct()
     {   
         $this->m_prestasi_guru = new PrestasiGuruModel();
+        $this->m_tahun = new TahunModel();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -23,7 +25,7 @@ class PrestasiGuru extends BaseController
     public function tambah_prestasi_guru()
     {
         $data['title'] = 'Tambah Prestasi Guru';
-        $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+        $data['tahun'] = $this->m_tahun->list_tahun();
         return view('admin/prestasi_guru/form_tambah', $data);
     }
 
@@ -36,7 +38,6 @@ class PrestasiGuru extends BaseController
             'prestasi' =>  ['label' => 'Prestasi', 'rules' => 'required|max_length[100]'],
             'nama_guru' =>  ['label' => 'Nama Guru', 'rules' => 'max_length[100]'],
             'tingkat' =>  ['label' => 'Tingkat', 'rules' => 'required|numeric'],
-            'jenis' =>  ['label' => 'Jenis', 'rules' => 'required|numeric'],
             'keterangan' =>  ['label' => 'Keterangan', 'rules' => 'max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
@@ -84,7 +85,7 @@ class PrestasiGuru extends BaseController
         {
             $data['title'] = 'Edit Prestasi Guru';
             $data['data'] = $this->m_prestasi_guru->get_prestasi_guru($id);
-            $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+            $data['tahun'] = $this->m_tahun->list_tahun();
             return view('admin/prestasi_guru/form_edit', $data);
         }else
         {
@@ -101,7 +102,6 @@ class PrestasiGuru extends BaseController
             'prestasi' =>  ['label' => 'Prestasi', 'rules' => 'required|max_length[100]'],
             'nama_guru' =>  ['label' => 'Nama Guru', 'rules' => 'max_length[100]'],
             'tingkat' =>  ['label' => 'Tingkat', 'rules' => 'required|numeric'],
-            'jenis' =>  ['label' => 'Jenis', 'rules' => 'required|numeric'],
             'keterangan' =>  ['label' => 'Keterangan', 'rules' => 'max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);

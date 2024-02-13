@@ -71,7 +71,7 @@ $id_tahun = old('id_tahun') ?? $data->id_tahun;
                             </div>
                             <div class="form-group row">
                                 <div class="offset-sm-3 col-sm-9">
-                                <span class="text-danger"><b>*</b></span>) Field Wajib Diisi
+                                    <span class="text-danger"><b>*</b></span>) Field Wajib Diisi
                                 </div>
                             </div>
                         </div>

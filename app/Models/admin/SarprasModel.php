@@ -26,7 +26,7 @@ class SarprasModel extends Model
 
     function edit_sarpras($data)
     {
-        $this->where(['id' => 1])->update($data);
+        $this->set($data)->where(['id' => 1])->update();
     }
 
 }

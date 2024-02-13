@@ -5,7 +5,6 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\Admin\DownloadModel;
 
-
 class Download extends BaseController
 {
     function __construct()
@@ -44,7 +43,7 @@ class Download extends BaseController
         $nama_file = '';
         if($file != '')
         {
-            $nama_file = $file->getRandomName();
+            $nama_file = $file->getName();
             $file->move('uploads/file', $nama_file);
         }
             
@@ -102,11 +101,11 @@ class Download extends BaseController
         {
             if($get->file == '' OR $get->file == null)
             {
-                $nama_file = $file->getRandomName();
+                $nama_file = $file->getName();
                 $file->move('uploads/file', $nama_file);
             }elseif($get->file != '' AND $get->file != null)
             {
-                $nama_file = $file->getRandomName();
+                $nama_file = $file->getName();
                 $file->move('uploads/file', $nama_file);
                 unlink("uploads/file/$get->file");
             }else

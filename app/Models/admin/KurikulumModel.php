@@ -24,6 +24,11 @@ class KurikulumModel extends Model
         return $this->orderBy('id_kurikulum','desc')->get()->getResult();
     }
 
+    function list_kurikulum_order_by_mapel_asc()
+    {
+        return $this->orderBy('mapel','asc')->get()->getResult();
+    }
+    
     function tambah_kurikulum($data)
     {
         $this->insert($data);

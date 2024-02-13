@@ -11,7 +11,5 @@ class StatistikModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = false;
     protected $allowedFields    = [];
-
     
-
 }

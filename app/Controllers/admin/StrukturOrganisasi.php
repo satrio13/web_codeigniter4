@@ -29,7 +29,7 @@ class StrukturOrganisasi extends BaseController
 
     public function update_struktur_organisasi()
     {
-        $get = $this->db->table('tb_struktur_organisasi')->select('isi')->getWhere(['id' => 1])->getRow();
+        $get = $this->m_struktur_organisasi->get_struktur_organisasi();
         $gambar = $this->request->getFile('struktur');
         $nama_gambar = '';
         if($gambar != '')

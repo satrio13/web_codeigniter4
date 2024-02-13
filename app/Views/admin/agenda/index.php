@@ -96,7 +96,7 @@
                                         echo '<tr>
                                                 <td class="text-center">'.$no++.'</td>
                                                 <td>'.$r->nama_agenda.'</td>
-                                                <td>'.$keterangan.'</td>
+                                                <td>'.htmlspecialchars_decode($keterangan).'</td>
                                                 <td>'.$tgl.'</td>
                                                 <td>'.$jam.'</td>
                                                 <td>'.$r->tempat.'</td>

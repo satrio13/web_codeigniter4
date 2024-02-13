@@ -148,7 +148,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-list"></i>
                                 <small>PROFIL
-                                    <i class="right fas fa-angle-left"></i>
+                                    <i class="right fas fa-angle-left float-right"></i>
                                 </small>
                             </a>
                             <ul class="nav nav-treeview">
@@ -212,7 +212,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-book"></i>
                                 <small>PENDIDIKAN
-                                    <i class="right fas fa-angle-left"></i>
+                                    <i class="right fas fa-angle-left float-right"></i>
                                 </small>
                             </a>
                             <ul class="nav nav-treeview">
@@ -252,7 +252,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
                                 <small>ALUMNI
-                                    <i class="right fas fa-angle-left"></i>
+                                    <i class="right fas fa-angle-left float-right"></i>
                                 </small>
                             </a>
                             <ul class="nav nav-treeview">
@@ -274,7 +274,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-folder-open"></i>
                                 <small>GALLERI
-                                    <i class="right fas fa-angle-left"></i>
+                                    <i class="right fas fa-angle-left float-right"></i>
                                 </small>
                             </a>
                             <ul class="nav nav-treeview">
@@ -285,7 +285,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('backend/foto'); ?>" class="<?php if($uri->getSegment(2) == 'foto' OR $uri->getSegment(2) == 'tambah-foto' OR $uri->getSegment(2) == 'edit-foto'){ echo'nav-link active'; }else{ echo'nav-link'; } ?>">
+                                    <a href="<?= base_url('backend/foto'); ?>" class="<?php if($uri->getSegment(2) == 'foto'){ echo'nav-link active'; }else{ echo'nav-link'; } ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <small>FOTO</small>
                                     </a>
@@ -302,7 +302,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-users"></i>
                                 <small>MANAJEMEN USERS
-                                    <i class="right fas fa-angle-left"></i>
+                                    <i class="right fas fa-angle-left float-right"></i>
                                 </small>
                             </a>
                             <ul class="nav nav-treeview">

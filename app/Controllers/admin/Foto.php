@@ -4,12 +4,14 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\FotoModel;
+use App\Models\Admin\AlbumModel;
 
 class Foto extends BaseController
 {
     function __construct()
     {   
         $this->m_foto = new FotoModel();
+        $this->m_album = new AlbumModel();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -17,7 +19,7 @@ class Foto extends BaseController
     {
         $data['title'] = 'Foto';
         $data['data'] = $this->m_foto->list_foto();
-        $data['album'] = $this->db->table('tb_album')->select('*')->orderBy('album','asc')->get()->getResult();
+        $data['album'] = $this->m_album->list_album_order_by_name_asc();
         return view('admin/foto/index', $data);
     }
 

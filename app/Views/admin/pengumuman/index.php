@@ -86,7 +86,7 @@
                                         echo '<tr>
                                                 <td class="text-center">'.$no++.'</td>
                                                 <td>'.$r->nama.'</td>
-                                                <td>'.$pengumuman.'</td>
+                                                <td>'.htmlspecialchars_decode($pengumuman).'</td>
                                                 <td class="text-center">'.$img.'</td>
                                                 <td>'.$r->nama_operator.'</td>
                                                 <td>'.$r->hari. ', ' .date('d-m-Y', strtotime($r->tgl)).'</td>

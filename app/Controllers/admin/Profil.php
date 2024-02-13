@@ -16,14 +16,14 @@ class Profil extends BaseController
     public function index()
     {
         $data['title'] = 'Profil Website';
-        $data['data'] = $this->m_profil->tampil_profil();
+        $data['data'] = $this->m_profil->get_profil();
         return view('admin/profil/index', $data);
     }
 
     public function edit_profil_web()
     {
         $data['title'] = 'Edit Profil Website';
-        $data['data'] = $this->m_profil->tampil_profil();
+        $data['data'] = $this->m_profil->get_profil();
         return view('admin/profil/form_profil_web', $data);
     }
 
@@ -89,24 +89,24 @@ class Profil extends BaseController
     public function logo_web()
     {
         $data['title'] = 'Edit Logo Website';
-        $data['data'] = $this->db->table('tb_profil')->select('logo_web')->getWhere(['id'=>1])->getRow();
+        $data['data'] = $this->m_profil->get_profil('logo_web');
         return view('admin/profil/form_logo_web', $data);
     }
 
     public function update_logo_web()
     {
-        $get = $this->db->table('tb_profil')->select('logo_web')->getWhere(['id' => 1])->getRow();
+        $get = $this->m_profil->get_profil('logo_web');
         $gambar = $this->request->getFile('logo_web');
         $nama_gambar = '';
         if($gambar != '')
         {
             if($get->logo_web == '' OR $get->logo_web == null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/logo', $nama_gambar);
             }elseif($get->logo_web != '' AND $get->logo_web != null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/logo', $nama_gambar);
                 if(file_exists("uploads/img/logo/$get->logo_web"))
                 {
@@ -138,24 +138,24 @@ class Profil extends BaseController
     public function favicon()
     {
         $data['title'] = 'Edit Favicon';
-        $data['data'] = $this->db->table('tb_profil')->select('favicon')->getWhere(['id'=>1])->getRow();
+        $data['data'] = $this->m_profil->get_profil('favicon');
         return view('admin/profil/form_favicon', $data);
     }
 
     public function update_favicon()
     {
-        $get = $this->db->table('tb_profil')->select('favicon')->getWhere(['id' => 1])->getRow();
+        $get = $this->m_profil->get_profil('favicon');
         $gambar = $this->request->getFile('favicon');
         $nama_gambar = '';
         if($gambar != '')
         {
             if($get->favicon == '' OR $get->favicon == null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/logo', $nama_gambar);
             }elseif($get->favicon != '' AND $get->favicon != null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/logo', $nama_gambar);
                 if(file_exists("uploads/img/logo/$get->favicon"))
                 {
@@ -187,24 +187,24 @@ class Profil extends BaseController
     public function logo_admin()
     {
         $data['title'] = 'Edit Logo Admin';
-        $data['data'] = $this->db->table('tb_profil')->select('logo_admin')->getWhere(['id'=>1])->getRow();
+        $data['data'] = $this->m_profil->get_profil('logo_admin');
         return view('admin/profil/form_logo_admin', $data);
     }
 
     public function update_logo_admin()
     {
-        $get = $this->db->table('tb_profil')->select('logo_admin')->getWhere(['id' => 1])->getRow();
+        $get = $this->m_profil->get_profil('logo_admin');
         $gambar = $this->request->getFile('logo_admin');
         $nama_gambar = '';
         if($gambar != '')
         {
             if($get->logo_admin == '' OR $get->logo_admin == null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/logo', $nama_gambar);
-            }elseif($get->favicon != '' AND $get->favicon != null)
+            }elseif($get->logo_admin != '' AND $get->logo_admin != null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/logo', $nama_gambar);
                 if(file_exists("uploads/img/logo/$get->logo_admin"))
                 {
@@ -236,24 +236,24 @@ class Profil extends BaseController
     public function gambar_profil()
     {
         $data['title'] = 'Edit Gambar Profil';
-        $data['data'] = $this->db->table('tb_profil')->select('gambar')->getWhere(['id'=>1])->getRow();
+        $data['data'] = $this->m_profil->get_profil('gambar');
         return view('admin/profil/form_gambar', $data);
     }
 
     public function update_gambar_profil()
     {
-        $get = $this->db->table('tb_profil')->select('gambar')->getWhere(['id' => 1])->getRow();
+        $get = $this->m_profil->get_profil('gambar');
         $gambar = $this->request->getFile('gambar');
         $nama_gambar = '';
         if($gambar != '')
         {
             if($get->gambar == '' OR $get->gambar == null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/profil', $nama_gambar);
             }elseif($get->gambar != '' AND $get->gambar != null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/profil', $nama_gambar);
                 if(file_exists("uploads/img/profil/$get->gambar"))
                 {
@@ -285,24 +285,24 @@ class Profil extends BaseController
     public function file()
     {
         $data['title'] = 'Edit File';
-        $data['data'] = $this->db->table('tb_profil')->select('file')->getWhere(['id'=>1])->getRow();
+        $data['data'] = $this->m_profil->get_profil('file');
         return view('admin/profil/form_file', $data);
     }
 
     public function update_file()
     {
-        $get = $this->db->table('tb_profil')->select('file')->getWhere(['id' => 1])->getRow();
+        $get = $this->m_profil->get_profil('file');
         $gambar = $this->request->getFile('file');
         $nama_gambar = '';
         if($gambar != '')
         {
             if($get->file == '' OR $get->file == null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/file', $nama_gambar);
             }elseif($get->file != '' AND $get->file != null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/file', $nama_gambar);
                 if(file_exists("uploads/file/$get->file"))
                 {

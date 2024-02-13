@@ -129,7 +129,7 @@
                                                 <td>'.$r->tahun.'</td>
                                                 <td>'.$r->nama.'</td>
                                                 <td>'.$jenis.'</td>
-                                                <td>'.$r->prestasi.'</td>
+                                                <td>Juara '.$r->prestasi.'</td>
                                                 <td>'.$kab.'</td>
                                                 <td>'.$kar.'</td>
                                                 <td>'.$prov.'</td>

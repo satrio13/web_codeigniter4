@@ -42,7 +42,7 @@ class Banner extends BaseController
         $nama_gambar = '';
         if($gambar != '')
         {
-            $nama_gambar = $gambar->getName();
+            $nama_gambar = $gambar->getRandomName();
             $gambar->move('uploads/img/banner', $nama_gambar);
         }else
         {
@@ -103,11 +103,11 @@ class Banner extends BaseController
         {
             if($get->gambar == '' OR $get->gambar == null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/banner', $nama_gambar);
             }elseif($get->gambar != '' AND $get->gambar != null)
             {
-                $nama_gambar = $gambar->getName();
+                $nama_gambar = $gambar->getRandomName();
                 $gambar->move('uploads/img/banner', $nama_gambar);
                 unlink("uploads/img/banner/$get->gambar");
             }else

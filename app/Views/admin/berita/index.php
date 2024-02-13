@@ -59,10 +59,10 @@
                                         if(strlen($r->isi) > 200)
                                         {
                                             $isi = substr($r->isi,0,200); 
-                                            $pengumuman = substr($r->isi,0,strrpos($isi," ")). '...';
+                                            $berita = substr($r->isi,0,strrpos($isi," ")). '...';
                                         }else
                                         {
-                                            $pengumuman = $r->isi;
+                                            $berita = $r->isi;
                                         }
 
                                         if($r->gambar!='' AND file_exists("uploads/img/berita/$r->gambar"))
@@ -86,7 +86,7 @@
                                         echo '<tr>
                                                 <td class="text-center">'.$no++.'</td>
                                                 <td>'.$r->nama.'</td>
-                                                <td>'.$pengumuman.'</td>
+                                                <td>'.htmlspecialchars_decode($berita).'</td>
                                                 <td class="text-center">'.$img.'</td>
                                                 <td>'.$r->nama_operator.'</td>
                                                 <td>'.$r->hari. ', ' .date('d-m-Y', strtotime($r->tgl)).'</td>

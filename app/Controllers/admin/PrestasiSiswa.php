@@ -4,12 +4,14 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\PrestasiSiswaModel;
+use App\Models\Admin\TahunModel;
 
 class PrestasiSiswa extends BaseController
 {
     function __construct()
     {   
         $this->m_prestasi_siswa = new PrestasiSiswaModel();
+        $this->m_tahun = new TahunModel();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -23,7 +25,7 @@ class PrestasiSiswa extends BaseController
     public function tambah_prestasi_siswa()
     {
         $data['title'] = 'Tambah Prestasi Siswa';
-        $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+        $data['tahun'] = $this->m_tahun->list_tahun();
         return view('admin/prestasi_siswa/form_tambah', $data);
     }
 
@@ -37,7 +39,6 @@ class PrestasiSiswa extends BaseController
             'nama_siswa' =>  ['label' => 'Nama Siswa', 'rules' => 'required|max_length[100]'],
             'kelas' =>  ['label' => 'Kelas', 'rules' => 'max_length[6]'],
             'tingkat' =>  ['label' => 'Tingkat', 'rules' => 'required|numeric'],
-            'jenis' =>  ['label' => 'Jenis', 'rules' => 'required|numeric'],
             'keterangan' =>  ['label' => 'Keterangan', 'rules' => 'max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
@@ -86,7 +87,7 @@ class PrestasiSiswa extends BaseController
         {
             $data['title'] = 'Edit Prestasi Siswa';
             $data['data'] = $this->m_prestasi_siswa->get_prestasi_siswa($id);
-            $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+            $data['tahun'] = $this->m_tahun->list_tahun();
             return view('admin/prestasi_siswa/form_edit', $data);
         }else
         {
@@ -104,7 +105,6 @@ class PrestasiSiswa extends BaseController
             'nama_siswa' =>  ['label' => 'Nama Siswa', 'rules' => 'required|max_length[100]'],
             'kelas' =>  ['label' => 'Kelas', 'rules' => 'max_length[6]'],
             'tingkat' =>  ['label' => 'Tingkat', 'rules' => 'required|numeric'],
-            'jenis' =>  ['label' => 'Jenis', 'rules' => 'required|numeric'],
             'keterangan' =>  ['label' => 'Keterangan', 'rules' => 'max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);

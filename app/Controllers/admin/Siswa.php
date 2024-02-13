@@ -4,12 +4,14 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\SiswaModel;
+use App\Models\Admin\TahunModel;
 
 class Siswa extends BaseController
 {
     function __construct()
     {   
         $this->m_siswa = new SiswaModel();
+        $this->m_tahun = new TahunModel();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -23,7 +25,7 @@ class Siswa extends BaseController
     public function tambah_siswa()
     {
         $data['title'] = 'Tambah Peserta Didik';
-        $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+        $data['tahun'] = $this->m_tahun->list_tahun();
         $data['profil'] = profil_web();
         return view('admin/siswa/form_tambah', $data);
     }
@@ -74,7 +76,7 @@ class Siswa extends BaseController
         {
             $data['title'] = 'Edit Peserta Didik';
             $data['data'] = $this->m_siswa->get_siswa($id);
-            $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
+            $data['tahun'] = $this->m_tahun->list_tahun();
             $data['profil'] = profil_web();
             return view('admin/siswa/form_edit', $data);
         }else

@@ -131,7 +131,7 @@
                                                 <td>'.$r->tahun.'</td>
                                                 <td>'.$r->nama.'</td>
                                                 <td>'.$jenis.'</td>
-                                                <td>'.$r->prestasi.'</td>
+                                                <td>Juara '.$r->prestasi.'</td>
                                                 <td>'.$r->nama_siswa.'</td>
                                                 <td>'.$r->kelas.'</td>
                                                 <td>'.$kab.'</td>

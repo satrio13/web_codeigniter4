@@ -108,7 +108,7 @@
         <hr>
         <div class="row">
             <div class="col-md-3"><b>PROFIL</b></div>
-            <div class="col-md-9"><b>:</b> <?= $data->profil; ?></div>
+            <div class="col-md-9"><b>:</b> <?= htmlspecialchars_decode($data->profil); ?></div>
         </div>
     <?php } ?>
 </div>

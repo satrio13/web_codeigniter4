@@ -38,13 +38,13 @@
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-2 col-form-label">GAMBAR <span class="text-danger">*</span></label>
                                     <div class="col-sm-5">
-                                    <?php if(empty($data->isi)){ ?>
-                                        <img class='img-responsive' id='preview_gambar' width='150px'>
-                                    <?php }else{ ?>
-                                        <img class='img-responsive' id='preview_gambar' width='150px' src="<?= base_url(); ?>uploads/img/struktur/<?= $data->isi; ?>">
-                                    <?php } ?>
-                                    <input type='file' class='form-control' name='struktur' accept='image/png, image/jpeg' onchange='readURL(this);' required>
-                                    <p style="color: red"> *) format file JPG/PNG ukuran maksimal 1 MB</p>
+                                        <?php if(empty($data->isi)){ ?>
+                                            <img class='img-responsive' id='preview_gambar' width='150px'>
+                                        <?php }else{ ?>
+                                            <img class='img-responsive' id='preview_gambar' width='150px' src="<?= base_url(); ?>uploads/img/struktur/<?= $data->isi; ?>">
+                                        <?php } ?>
+                                        <input type='file' class='form-control' name='struktur' accept='image/png, image/jpeg' onchange='readURL(this);' required>
+                                        <p style="color: red"> *) format file JPG/PNG ukuran maksimal 1 MB</p>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,5 @@
     </div>
 <?= $this->endSection(); ?>
 <?= $this->section('script'); ?>
-    <script>
-
-    </script>
+    
 <?= $this->endSection(); ?>

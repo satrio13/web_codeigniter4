@@ -36,15 +36,15 @@
                         <input type="hidden" name="_method" value="PUT">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">GAMBAR PROFIL *</label>
+                                <label class="col-sm-2 col-form-label">GAMBAR PROFIL <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                <?php if(empty($data->gambar)){ ?>
-                                    <img class='img-responsive' id='preview_gambar' width='150px'>
-                                <?php }else{ ?>
-                                    Gambar Sekarang: <img class='img-responsive mb-2' id='preview_gambar' width='150px' src="<?= base_url(); ?>uploads/img/profil/<?= $data->gambar; ?>">
-                                <?php } ?>
-                                <input type='file' name='gambar' id="file-upload" accept='image/png, image/jpeg' class='form-control' onchange='readURL(this);' required>
-                                <p style="color: red"> *) format file JPG/PNG ukuran maksimal 1 MB</p>
+                                    <?php if(empty($data->gambar)){ ?>
+                                        <img class='img-responsive' id='preview_gambar' width='150px'>
+                                    <?php }else{ ?>
+                                        Gambar Sekarang: <img class='img-responsive mb-2' id='preview_gambar' width='150px' src="<?= base_url(); ?>uploads/img/profil/<?= $data->gambar; ?>">
+                                    <?php } ?>
+                                    <input type='file' name='gambar' id="file-upload" accept='image/png, image/jpeg' class='form-control' onchange='readURL(this);' required>
+                                    <p style="color: red"> *) format file JPG/PNG ukuran maksimal 1 MB</p>
                                 </div>
                             </div>
                         </div>

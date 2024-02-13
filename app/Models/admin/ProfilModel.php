@@ -20,9 +20,9 @@ class ProfilModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
-    function tampil_profil()
+    function get_profil($select = '*')
     {
-        return $this->getWhere(['id' => 1])->getRow();
+        return $this->select($select)->getWhere(['id' => 1])->getRow();
     }
 
     function update_profil($data)

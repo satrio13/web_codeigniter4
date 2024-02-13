@@ -59,7 +59,7 @@ $tingkat = old('tingkat') ?? $data->tingkat;
                                 <div class="col-sm-4">
                                     <select name="jenis" class="form-control required">
                                         <option value="1" <?= ($jenis == 1) ? 'selected' : ''; ?> >Akademik</option>
-                                        <option value="2" <?= ($jenis == 0) ? 'selected' : ''; ?> >Non Akademik</option>
+                                        <option value="2" <?= ($jenis == 2) ? 'selected' : ''; ?> >Non Akademik</option>
                                     </select>
                                     <small class="text-danger">
                                         <?= (session()->has('validation')) ? session('validation')->getError('jenis') : '' ?>

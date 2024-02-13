@@ -22,7 +22,7 @@ class Kalender extends BaseController
 
     public function update_kalender()
     {
-        $get = $this->db->table('tb_kalender')->select('kalender')->getWhere(['id' => 1])->getRow();
+        $get = $this->m_kalender->get_kalender();
         $gambar = $this->request->getFile('file');
         $nama_gambar = '';
         if($gambar != '')

@@ -23,6 +23,11 @@ class AlbumModel extends Model
     {
         return $this->orderBy('id_album','desc')->get()->getResult();
     }
+    
+    function list_album_order_by_name_asc()
+    {
+        return $this->orderBy('album','asc')->get()->getResult();
+    }
 
     function tambah_album($data)
     {

@@ -17,8 +17,8 @@
         <div class="row">
             <div class="col-md-12 embed-responsive embed-responsive-16by9">
                 <?php 
-                if($data->kalender != '' AND file_exists("uploads/file/$data->kalender")){ ?>
-                    <embed src="<?= base_url("uploads/file/$data->kalender"); ?>" class="embed-responsive-item col-md-12" allowfullscreen></embed>   
+                if($data->kalender != '' AND file_exists("uploads/img/kalender/$data->kalender")){ ?>
+                    <embed src="<?= base_url("uploads/img/kalender/$data->kalender"); ?>" class="embed-responsive-item col-md-12" allowfullscreen></embed>   
                 <?php } ?>
             </div> 
         </div>

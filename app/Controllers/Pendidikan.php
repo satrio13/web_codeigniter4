@@ -4,12 +4,14 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\PendidikanModel;
+use App\Models\Admin\TahunModel;
 
 class Pendidikan extends BaseController
 {
     function __construct()
     {   
         $this->m_pendidikan = new PendidikanModel();
+        $this->m_tahun = new TahunModel();
     }
 
     public function index()
@@ -25,7 +27,6 @@ class Pendidikan extends BaseController
         $data['kelompok_b'] = $this->m_pendidikan->tampil_kurikulum_b();
         $data['kelompok_c'] = $this->m_pendidikan->tampil_kurikulum_c();
         return view('pendidikan/kurikulum', $data);
-
     }
 
     public function kalender()
@@ -48,7 +49,7 @@ class Pendidikan extends BaseController
         
         $data['titleweb'] = "Rekap Ujian $jenis - ".title();
         $data['title'] = "Rekap Ujian $jenis";
-        $data['tahun'] = $this->db->table('tb_tahun')->orderBy('tahun','desc')->get()->getResult();
+        $data['tahun'] = $this->m_tahun->list_tahun();
         $data['submit'] = $this->request->getVar('submit');
         $data['data'] = $this->m_pendidikan->cari_rekap_us($this->request->getVar('id_tahun'));
         return view('pendidikan/rekap_us', $data);

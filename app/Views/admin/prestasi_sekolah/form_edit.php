@@ -59,7 +59,7 @@ $tingkat = old('tingkat') ?? $data->tingkat;
                                 <div class="col-sm-4">
                                     <select name="jenis" class="form-control required">
                                         <option value="1" <?= ($jenis == 1) ? 'selected' : ''; ?> >Akademik</option>
-                                        <option value="2" <?= ($jenis == 0) ? 'selected' : ''; ?> >Non Akademik</option>
+                                        <option value="2" <?= ($jenis == 2) ? 'selected' : ''; ?> >Non Akademik</option>
                                     </select>
                                     <small class="text-danger">
                                         <?= (session()->has('validation')) ? session('validation')->getError('jenis') : '' ?>
@@ -130,7 +130,7 @@ $tingkat = old('tingkat') ?? $data->tingkat;
                         </div>
                         <div class="card-footer">
                             <button type="submit" name="submit" value="Submit" class="btn btn-primary btn-sm" onclick="return VerifyUploadSizeIsOK()"><i class="fa fa-check"></i> SIMPAN</button>
-                            <a href="<?= base_url('backend/prestasi-siswa'); ?>" class="btn btn-danger btn-sm float-right"><i class="fa fa-arrow-left"></i> BATAL</a>
+                            <a href="<?= base_url('backend/prestasi-sekolah'); ?>" class="btn btn-danger btn-sm float-right"><i class="fa fa-arrow-left"></i> BATAL</a>
                         </div>  
                         <?php echo form_close() ?>
                     </div>

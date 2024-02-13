@@ -129,7 +129,7 @@ $berapa_hari = old('berapa_hari');
                                 </div>
                                 <div class="form-group row">
                                     <div class="offset-sm-2 col-sm-10">
-                                    <span class="text-danger"><b>*</b></span>) Field Wajib Diisi
+                                        <span class="text-danger"><b>*</b></span>) Field Wajib Diisi
                                     </div>
                                 </div>
                             </div>

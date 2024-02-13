@@ -4,12 +4,16 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\RekapUSModel;
+use App\Models\Admin\TahunModel;
+use App\Models\Admin\KurikulumModel;
 
 class RekapUS extends BaseController
 {
     function __construct()
     {   
         $this->m_us = new RekapUSModel();
+        $this->m_tahun = new TahunModel();
+        $this->m_kurikulum = new KurikulumModel();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -23,8 +27,8 @@ class RekapUS extends BaseController
     public function tambah_rekap_us()
     {
         $data['title'] = 'Tambah Rekap US / UM';
-        $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
-        $data['mapel'] = $this->db->table('tb_kurikulum')->select('*')->orderBy('mapel','asc')->get()->getResult();
+        $data['tahun'] = $this->m_tahun->list_tahun();
+        $data['mapel'] = $this->m_kurikulum->list_kurikulum_order_by_mapel_asc();
         return view('admin/rekap_us/form_tambah', $data);
     }
 
@@ -70,8 +74,8 @@ class RekapUS extends BaseController
         {
             $data['title'] = 'Edit Rekap US / UM';
             $data['data'] = $this->m_us->get_rekap_us($id);
-            $data['tahun'] = $this->db->table('tb_tahun')->select('*')->orderBy('tahun','desc')->get()->getResult();
-            $data['mapel'] = $this->db->table('tb_kurikulum')->select('*')->orderBy('mapel','asc')->get()->getResult();
+            $data['tahun'] = $this->m_tahun->list_tahun();
+            $data['mapel'] = $this->m_kurikulum->list_kurikulum_order_by_mapel_asc();
             return view('admin/rekap_us/form_edit', $data);
         }else
         {

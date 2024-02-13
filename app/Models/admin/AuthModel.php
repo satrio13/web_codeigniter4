@@ -14,4 +14,9 @@ class AuthModel extends Model
     protected $protectFields    = false;
     protected $allowedFields    = [];
     
+    function cek_user($username)
+    {
+        return $this->getWhere(['username' => $username])->getRow();
+    }
+    
 }

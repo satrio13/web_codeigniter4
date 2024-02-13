@@ -47,63 +47,63 @@
                                             <th>KETERANGAN</th>
                                             <th width="10%">AKSI</th>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php 
-                                        $no = 1;
-                                        foreach($data as $r):
-                                            if($r->gambar != '' AND file_exists("uploads/img/ekstrakurikuler/$r->gambar"))
-                                            {
-                                                $img = '<a href="'.base_url("uploads/img/ekstrakurikuler/$r->gambar").'" target="_blank">
-                                                        <img src="'.base_url("uploads/img/ekstrakurikuler/$r->gambar").'" class="img img-fluid" width="200px">
-                                                        </a>';
-                                            }else
-                                            {
-                                                $img = '';
-                                            }
+                                    </thead>
+                                    <tbody>
+                                    <?php 
+                                    $no = 1;
+                                    foreach($data as $r):
+                                        if($r->gambar != '' AND file_exists("uploads/img/ekstrakurikuler/$r->gambar"))
+                                        {
+                                            $img = '<a href="'.base_url("uploads/img/ekstrakurikuler/$r->gambar").'" target="_blank">
+                                                    <img src="'.base_url("uploads/img/ekstrakurikuler/$r->gambar").'" class="img img-fluid" width="200px">
+                                                    </a>';
+                                        }else
+                                        {
+                                            $img = '';
+                                        }
 
-                                            if(strlen($r->keterangan) > 200)
-                                            {
-                                                $isi = substr($r->keterangan,0,200); 
-                                                $keterangan = substr($r->keterangan,0,strrpos($isi," ")). '... <a href="'.base_url("ekstrakurikuler/detail/$r->slug").'" target="_blank"> lihat detail</a>';
-                                            }else
-                                            {
-                                                $keterangan = $r->keterangan;
-                                            }
-                                            echo'<tr>
-                                                    <td class="text-center">'.$no++.'</td>
-                                                    <td>'.$r->nama_ekstrakurikuler.'</td>
-                                                    <td class="text-center">'.$img.'</td>
-                                                    <td>'.$keterangan.'</td>
-                                                    <td class="text-center">
-                                                        <a href="'.base_url("backend/edit-ekstrakurikuler/$r->id").'" class="btn btn-info btn-xs" title="EDIT DATA">EDIT</a>
-                                                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#konfirmasi_hapus" 
-                                                        data-href="'.base_url("backend/hapus-ekstrakurikuler/$r->id").'" title="HAPUS DATA">HAPUS</a>
-                                                        </td>
-                                                </tr>';
-                                        endforeach;
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div class="modal fade mt-5" id="konfirmasi_hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                <b>Anda yakin ingin menghapus data ini ?</b><br><br>
-                <a class="btn btn-danger btn-ok"> Hapus</a>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
+                                        if(strlen($r->keterangan) > 200)
+                                        {
+                                            $isi = substr($r->keterangan,0,200); 
+                                            $keterangan = substr($r->keterangan,0,strrpos($isi," ")). '... <a href="'.base_url("ekstrakurikuler/detail/$r->slug").'" target="_blank"> lihat detail</a>';
+                                        }else
+                                        {
+                                            $keterangan = $r->keterangan;
+                                        }
+                                        echo'<tr>
+                                                <td class="text-center">'.$no++.'</td>
+                                                <td>'.$r->nama_ekstrakurikuler.'</td>
+                                                <td class="text-center">'.$img.'</td>
+                                                <td>'.htmlspecialchars_decode($keterangan).'</td>
+                                                <td class="text-center">
+                                                    <a href="'.base_url("backend/edit-ekstrakurikuler/$r->id").'" class="btn btn-info btn-xs" title="EDIT DATA">EDIT</a>
+                                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#konfirmasi_hapus" 
+                                                    data-href="'.base_url("backend/hapus-ekstrakurikuler/$r->id").'" title="HAPUS DATA">HAPUS</a>
+                                                    </td>
+                                            </tr>';
+                                    endforeach;
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>  
                 </div>
             </div>
         </div>
+    </section>
+</div>
+
+<div class="modal fade mt-5" id="konfirmasi_hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            <b>Anda yakin ingin menghapus data ini ?</b><br><br>
+            <a class="btn btn-danger btn-ok"> Hapus</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
+            </div>
+        </div>
     </div>
+</div>
 <?= $this->endSection(); ?>
 <?= $this->section('script'); ?>
     <script>

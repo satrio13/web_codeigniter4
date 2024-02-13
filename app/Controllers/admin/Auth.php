@@ -3,20 +3,20 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\AuthModel;
+use App\Models\Admin\AuthModel;
 
 class Auth extends BaseController
 {
-    public function index()
-    {
-        return redirect()->to(site_url('login'));
+    function __construct()
+    {   
+        $this->m_auth = new AuthModel();
     }
 
     public function login()
     {
         if(session('id_user'))
         {
-            return redirect()->to(base_url('dashboard'));  
+            return redirect()->to(base_url('backend/dashboard'));  
         }
 
         return view('admin/auth/login');
@@ -25,8 +25,7 @@ class Auth extends BaseController
     public function proses_login()
     {
         $post = $this->request->getPost();
-        $q = $this->db->table('tb_user')->getWhere(['username' => $post['username']]);
-        $user = $q->getRow();
+        $user = $this->m_auth->cek_user($post['username']);
         if($user)
         {   
             if($user->is_active == '1')

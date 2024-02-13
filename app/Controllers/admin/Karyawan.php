@@ -35,7 +35,7 @@ class Karyawan extends BaseController
             'jk' =>  ['label' => 'Jenis Kelamin', 'rules' => 'required'],
             'statuspeg' =>  ['label' => 'Status Pegawai', 'rules' => 'required|max_length[5]'],
             'status' =>  ['label' => 'Status', 'rules' => 'required|max_length[10]'],
-            'email' =>  ['label' => 'Email', 'rules' => 'max_length[100]'],
+            'email' =>  ['label' => 'Email', 'rules' => 'trim|valid_email|max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
         
@@ -61,7 +61,6 @@ class Karyawan extends BaseController
             'nokarpeg' => esc($this->request->getVar('nokarpeg')),
             'golruang' => esc($this->request->getVar('golruang')),
             'statuspeg' => esc($this->request->getVar('statuspeg')),
-            'nama' => esc($this->request->getVar('nama')),
             'tmp_lahir' => esc($this->request->getVar('tmp_lahir')),
             'tgl_lahir' => esc($this->request->getVar('tgl_lahir')),
             'tmt_cpns' => esc($this->request->getVar('tmt_cpns')),
@@ -114,7 +113,7 @@ class Karyawan extends BaseController
             'jk' =>  ['label' => 'Jenis Kelamin', 'rules' => 'required'],
             'statuspeg' =>  ['label' => 'Status Pegawai', 'rules' => 'required|max_length[5]'],
             'status' =>  ['label' => 'Status', 'rules' => 'required|max_length[10]'],
-            'email' =>  ['label' => 'Email', 'rules' => 'max_length[100]'],
+            'email' =>  ['label' => 'Email', 'rules' => 'trim|valid_email|max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
                     
@@ -155,7 +154,6 @@ class Karyawan extends BaseController
             'nokarpeg' => esc($this->request->getVar('nokarpeg')),
             'golruang' => esc($this->request->getVar('golruang')),
             'statuspeg' => esc($this->request->getVar('statuspeg')),
-            'nama' => esc($this->request->getVar('nama')),
             'tmp_lahir' => esc($this->request->getVar('tmp_lahir')),
             'tgl_lahir' => esc($this->request->getVar('tgl_lahir')),
             'tmt_cpns' => esc($this->request->getVar('tmt_cpns')),
@@ -203,6 +201,19 @@ class Karyawan extends BaseController
             {
                 return redirect()->to(base_url('backend/karyawan'))->with('error', 'Data Gagal Dihapus, silahkan coba lagi!');
             }
+        }else
+        {
+            show_404();
+        }
+    }
+
+    public function lihat_karyawan($id)
+    {   
+        $cek = $this->m_karyawan->cek_karyawan($id);
+        if($cek)
+        {
+            $data = $this->m_karyawan->get_karyawan($id);
+            echo json_encode($data);
         }else
         {
             show_404();

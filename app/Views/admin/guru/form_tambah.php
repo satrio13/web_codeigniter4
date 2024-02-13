@@ -265,6 +265,9 @@
                                 <label class="col-sm-2 col-form-label">EMAIL</label>
                                 <div class="col-sm-5">
                                     <input type="email" name="email" maxlength="100" value="<?= set_value('email'); ?>" class="form-control" placeholder="EMAIL">
+                                    <small class="text-danger">
+                                        <?= (session()->has('validation')) ? session('validation')->getError('email') : '' ?>
+                                    </small> 
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -298,7 +301,7 @@
 <?= $this->endSection(); ?>
 <?= $this->section('script'); ?>
     <script>
-         $(document).ready(function () {
+        $(document).ready(function () {
             handle_validate();
         });
 
