@@ -13,21 +13,21 @@ class VisiMisi extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Visi & Misi';
         $data['data'] = $this->m_visimisi->get_visimisi();
         return view('admin/visi_misi/index', $data);
     }
 
-    public function edit_visi_misi()
+    function edit_visi_misi()
     {
         $data['title'] = 'Edit Visi & Misi';
         $data['data'] = $this->m_visimisi->get_visimisi();
         return view('admin/visi_misi/form_visi_misi', $data);
     }
 
-    public function update_visi_misi()
+    function update_visi_misi()
     {
         $this->rules->setRules([
             'isi' => ['label' => 'Isi', 'rules' => 'required'],
@@ -39,8 +39,7 @@ class VisiMisi extends BaseController
         }
             
         $data = [
-            'isi' => $this->request->getVar('isi'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'isi' => $this->request->getVar('isi')
         ];
 
         $this->m_visimisi->edit_visimisi($data);
@@ -49,7 +48,8 @@ class VisiMisi extends BaseController
             return redirect()->to(base_url('backend/visi-misi'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
+    
 }

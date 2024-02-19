@@ -13,20 +13,20 @@ class Agenda extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Agenda';
         $data['data'] = $this->m_agenda->list_agenda();
         return view('admin/agenda/index', $data);
     }
     
-    public function tambah_agenda()
+    function tambah_agenda()
     {
         $data['title'] = 'Tambah Agenda';
         return view('admin/agenda/form_tambah', $data);
     }
         
-    public function simpan_agenda()
+    function simpan_agenda()
     {
         if($this->request->getVar('berapa_hari') == '1')
         {   
@@ -76,9 +76,7 @@ class Agenda extends BaseController
             'keterangan' => esc($this->request->getVar('keterangan')),
             'tempat' => esc($this->request->getVar('tempat')),
             'gambar' => $nama_gambar,
-            'slug' => slug(esc($this->request->getVar('nama_agenda'))),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('nama_agenda')))
         ];
 
         $this->m_agenda->tambah_agenda($data);
@@ -87,11 +85,11 @@ class Agenda extends BaseController
             return redirect()->to(base_url('backend/agenda'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_agenda($id)
+    function edit_agenda($id)
     {   
         $cek = $this->m_agenda->cek_agenda($id);
         if($cek)
@@ -105,7 +103,7 @@ class Agenda extends BaseController
         }
     }
 
-    public function update_agenda($id)
+    function update_agenda($id)
     {
         if($this->request->getVar('berapa_hari') == '1')
         {   
@@ -172,8 +170,7 @@ class Agenda extends BaseController
                 'keterangan' => esc($this->request->getVar('keterangan')),
                 'tempat' => esc($this->request->getVar('tempat')),
                 'gambar' => $nama_gambar,
-                'slug' => slug(esc($this->request->getVar('nama_agenda'))),
-                'updated_at' => date('Y-m-d H:i:s')
+                'slug' => slug(esc($this->request->getVar('nama_agenda')))
             ];
         }else
         {
@@ -188,8 +185,7 @@ class Agenda extends BaseController
                 'keterangan' => esc($this->request->getVar('keterangan')),
                 'tempat' => esc($this->request->getVar('tempat')),
                 'gambar' => $nama_gambar,
-                'slug' => slug(esc($this->request->getVar('nama_agenda'))),
-                'updated_at' => date('Y-m-d H:i:s')
+                'slug' => slug(esc($this->request->getVar('nama_agenda')))
             ];
         }
         
@@ -199,11 +195,11 @@ class Agenda extends BaseController
             return redirect()->to(base_url('backend/agenda'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_agenda($id)
+    function hapus_agenda($id)
     {   
         $cek = $this->m_agenda->cek_agenda($id);
         if($cek)

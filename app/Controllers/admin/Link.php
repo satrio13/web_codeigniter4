@@ -13,20 +13,20 @@ class Link extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Link Terkait';
         $data['data'] = $this->m_link->list_link();
         return view('admin/link/index', $data);
     }
 
-    public function tambah_link()
+    function tambah_link()
     {
         $data['title'] = 'Tambah Link Terkait';
         return view('admin/link/form_tambah', $data);
     }
 
-    public function simpan_link()
+    function simpan_link()
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
@@ -42,9 +42,7 @@ class Link extends BaseController
         $data = [
             'nama' => esc($this->request->getVar('nama')),
             'link' => esc($this->request->getVar('link')),
-            'is_active' => esc($this->request->getVar('is_active')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'is_active' => esc($this->request->getVar('is_active'))
         ];
 
         $this->m_link->tambah_link($data);
@@ -53,11 +51,11 @@ class Link extends BaseController
             return redirect()->to(base_url('backend/link-terkait'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_link($id)
+    function edit_link($id)
     {   
         $cek = $this->m_link->cek_link($id);
         if($cek)
@@ -71,7 +69,7 @@ class Link extends BaseController
         }
     }
 
-    public function update_link($id)
+    function update_link($id)
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
@@ -87,8 +85,7 @@ class Link extends BaseController
         $data = [
             'nama' => esc($this->request->getVar('nama')),
             'link' => esc($this->request->getVar('link')),
-            'is_active' => esc($this->request->getVar('is_active')),
-            'updated_at' => date('Y-m-d H:i:s')
+            'is_active' => esc($this->request->getVar('is_active'))
         ];
 
         $this->m_link->edit_link($data, $id);
@@ -97,11 +94,11 @@ class Link extends BaseController
             return redirect()->to(base_url('backend/link-terkait'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_link($id)
+    function hapus_link($id)
     {
         $cek = $this->m_link->cek_link($id);
         if($cek)

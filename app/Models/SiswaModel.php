@@ -14,7 +14,7 @@ class SiswaModel extends Model
     protected $protectFields    = false;
     protected $allowedFields    = [];
 
-    public function list_siswa()
+    function list_siswa()
     {
         return $this->db->table('tb_siswa s')->select('s.*,t.tahun')->join('tb_tahun t','s.id_tahun=t.id_tahun')->orderBy('t.tahun','desc')->get()->getResult();
     }

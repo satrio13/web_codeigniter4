@@ -13,20 +13,20 @@ class Download extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Download';
         $data['data'] = $this->m_download->list_download();
         return view('admin/download/index', $data);
     }
 
-    public function tambah_download()
+    function tambah_download()
     {
         $data['title'] = 'Tambah Download';
         return view('admin/download/form_tambah', $data);
     }
 
-    public function simpan_download()
+    function simpan_download()
     {
         $this->rules->setRules([
             'nama_file' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
@@ -52,9 +52,7 @@ class Download extends BaseController
             'file' => $nama_file,
             'hits' => 0,
             'id_user' => session('id_user'),
-            'is_active' => esc($this->request->getVar('is_active')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'is_active' => esc($this->request->getVar('is_active'))
         ];
 
         $this->m_download->tambah_download($data);
@@ -63,11 +61,11 @@ class Download extends BaseController
             return redirect()->to(base_url('backend/download'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_download($id)
+    function edit_download($id)
     {   
         $cek = $this->m_download->cek_download($id);
         if($cek)
@@ -81,7 +79,7 @@ class Download extends BaseController
         }
     }
 
-    public function update_download($id)
+    function update_download($id)
     {
         $this->rules->setRules([
             'nama_file' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
@@ -122,8 +120,7 @@ class Download extends BaseController
             'file' => $nama_file,
             'hits' => 0,
             'id_user' => session('id_user'),
-            'is_active' => esc($this->request->getVar('is_active')),
-            'updated_at' => date('Y-m-d H:i:s')
+            'is_active' => esc($this->request->getVar('is_active'))
         ];
         
         $this->m_download->edit_download($data, $id);
@@ -132,11 +129,11 @@ class Download extends BaseController
             return redirect()->to(base_url('backend/download'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_download($id)
+    function hapus_download($id)
     {   
         $cek = $this->m_download->cek_download($id);
         if($cek)

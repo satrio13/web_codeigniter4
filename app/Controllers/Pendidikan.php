@@ -14,22 +14,17 @@ class Pendidikan extends BaseController
         $this->m_tahun = new TahunModel();
     }
 
-    public function index()
+    function kurikulum()
     {
-        show_404();
-    }
-
-    public function kurikulum()
-    {
-		$data['titleweb'] = 'Pendidikan - '.title();
-		$data['title'] = 'Pendidikan';
+		$data['titleweb'] = 'Kurikulum - '.title();
+		$data['title'] = 'Kurikulum';
         $data['kelompok_a'] = $this->m_pendidikan->tampil_kurikulum_a();
         $data['kelompok_b'] = $this->m_pendidikan->tampil_kurikulum_b();
         $data['kelompok_c'] = $this->m_pendidikan->tampil_kurikulum_c();
         return view('pendidikan/kurikulum', $data);
     }
 
-    public function kalender()
+    function kalender()
     {
 		$data['titleweb'] = 'Kalender Akademik - '.title();
 		$data['title'] = 'Kalender Akademik';
@@ -37,7 +32,7 @@ class Pendidikan extends BaseController
         return view('pendidikan/kalender', $data);
     }
 
-    public function rekap_us()
+    function rekap_us()
     {
 		if(jenjang() == 1 OR jenjang() == 2)
         { 

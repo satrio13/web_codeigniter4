@@ -13,20 +13,20 @@ class Video extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Video';
         $data['data'] = $this->m_video->list_video();
         return view('admin/video/index', $data);
     }
 
-    public function tambah_video()
+    function tambah_video()
     {
         $data['title'] = 'Tambah Video';
         return view('admin/video/form_tambah', $data);
     }
 
-    public function simpan_video()
+    function simpan_video()
     {
         $this->rules->setRules([
             'judul' => ['label' => 'Judul', 'rules' => 'required|max_length[100]'],
@@ -42,9 +42,7 @@ class Video extends BaseController
         $data = [
             'judul' => esc($this->request->getVar('judul')),
             'keterangan' => esc($this->request->getVar('keterangan')),
-            'link' => esc($this->request->getVar('link')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'link' => esc($this->request->getVar('link'))
         ];
 
         $this->m_video->tambah_video($data);
@@ -53,11 +51,11 @@ class Video extends BaseController
             return redirect()->to(base_url('backend/video'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_video($id)
+    function edit_video($id)
     {   
         $cek = $this->m_video->cek_video($id);
         if($cek)
@@ -71,7 +69,7 @@ class Video extends BaseController
         }
     }
 
-    public function update_video($id)
+    function update_video($id)
     {
         $this->rules->setRules([
             'judul' => ['label' => 'Judul', 'rules' => 'required|max_length[100]'],
@@ -87,8 +85,7 @@ class Video extends BaseController
         $data = [
             'judul' => esc($this->request->getVar('judul')),
             'keterangan' => esc($this->request->getVar('keterangan')),
-            'link' => esc($this->request->getVar('link')),
-            'updated_at' => date('Y-m-d H:i:s')
+            'link' => esc($this->request->getVar('link'))
         ];
 
         $this->m_video->edit_video($data, $id);
@@ -97,11 +94,11 @@ class Video extends BaseController
             return redirect()->to(base_url('backend/video'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_video($id)
+    function hapus_video($id)
     {
         $cek = $this->m_video->cek_video($id);
         if($cek)

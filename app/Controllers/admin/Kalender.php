@@ -13,14 +13,14 @@ class Kalender extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Kalender Akademik';
         $data['data'] = $this->m_kalender->get_kalender();
         return view('admin/kalender/index', $data);
     }
 
-    public function update_kalender()
+    function update_kalender()
     {
         $get = $this->m_kalender->get_kalender();
         $gambar = $this->request->getFile('file');
@@ -45,7 +45,7 @@ class Kalender extends BaseController
             }
         }else
         {
-            return redirect()->back()->with('error', 'Anda belum memilih file yang akan diupload!');
+            return redirect()->back()->withInput()->with('error', 'Anda belum memilih file yang akan diupload!');
         }
     
         $data = [
@@ -58,7 +58,8 @@ class Kalender extends BaseController
             return redirect()->to(base_url('backend/kalender'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
         }
     }
+    
 }

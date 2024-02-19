@@ -14,22 +14,22 @@ class AgendaModel extends Model
     protected $protectFields    = false;
     protected $allowedFields    = [];
 
-    public function list_agenda($page)
+    function list_agenda($page)
     {
         return $this->orderBy('id','desc')->paginate($page);
     }
 
-    public function list_agenda_cari($page, $keyword)
+    function list_agenda_cari($page, $keyword)
     {
         return $this->like('nama_agenda', $keyword)->orderBy('id','desc')->paginate($page);
     }
 
-    public function cek_agenda($slug)
+    function cek_agenda($slug)
     {
         return $this->select('slug')->getWhere(['slug' => $slug])->getRow();
     }
 
-    public function detail_agenda($slug)
+    function detail_agenda($slug)
     {
         return $this->getWhere(['slug' => $slug])->getRow();
     }

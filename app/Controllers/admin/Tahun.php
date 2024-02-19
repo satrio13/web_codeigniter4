@@ -13,20 +13,20 @@ class Tahun extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Tahun Akademik';
         $data['data'] = $this->m_tahun->list_tahun();
         return view('admin/tahun/index', $data);
     }
 
-    public function tambah_tahun()
+    function tambah_tahun()
     {
         $data['title'] = 'Tambah Tahun Akademik';
         return view('admin/tahun/form_tambah', $data);
     }
 
-    public function simpan_tahun()
+    function simpan_tahun()
     {
         $this->rules->setRules([
             'tahun' => ['label' => 'Tahun Akademik', 'rules' => 'required|max_length[10]'],
@@ -38,9 +38,7 @@ class Tahun extends BaseController
         }
 
         $data = [
-            'tahun' => esc($this->request->getVar('tahun')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'tahun' => esc($this->request->getVar('tahun'))
         ];
 
         $this->m_tahun->tambah_tahun($data);
@@ -49,11 +47,11 @@ class Tahun extends BaseController
             return redirect()->to(base_url('backend/tahun'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_tahun($id)
+    function edit_tahun($id)
     {   
         $cek = $this->m_tahun->cek_tahun($id);
         if($cek)
@@ -67,7 +65,7 @@ class Tahun extends BaseController
         }
     }
 
-    public function update_tahun($id)
+    function update_tahun($id)
     {
         $this->rules->setRules([
             'tahun' => ['label' => 'Tahun Akademik', 'rules' => 'required|max_length[10]'],
@@ -79,8 +77,7 @@ class Tahun extends BaseController
         }
 
         $data = [
-            'tahun' => esc($this->request->getVar('tahun')),
-            'updated_at' => date('Y-m-d H:i:s')
+            'tahun' => esc($this->request->getVar('tahun'))
         ];
 
         $this->m_tahun->edit_tahun($data, $id);
@@ -89,11 +86,11 @@ class Tahun extends BaseController
             return redirect()->to(base_url('backend/tahun'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_tahun($id)
+    function hapus_tahun($id)
     {
         $cek = $this->m_tahun->cek_tahun($id);
         if($cek)

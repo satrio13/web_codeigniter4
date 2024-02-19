@@ -15,7 +15,7 @@ class Foto extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Foto';
         $data['data'] = $this->m_foto->list_foto();
@@ -23,7 +23,7 @@ class Foto extends BaseController
         return view('admin/foto/index', $data);
     }
 
-    public function simpan_foto()
+    function simpan_foto()
     {
         $gambar = $this->request->getFileMultiple('files');
         if(!empty($gambar))
@@ -35,9 +35,7 @@ class Foto extends BaseController
                 
                 $data = [
                     'id_album' => esc($this->request->getVar('id_album')),
-                    'foto' => $nama_gambar,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s') 
+                    'foto' => $nama_gambar
                 ];
 
                 $this->m_foto->tambah_foto($data);
@@ -48,15 +46,15 @@ class Foto extends BaseController
                 return redirect()->to(base_url('backend/foto'))->with('success', 'File Berhasil Diupload');
             }else
             {
-                return redirect()->back()->with('error', 'File gagal diupload, silahkan coba lagi!');
+                return redirect()->back()->withInput()->with('error', 'File gagal diupload, silahkan coba lagi!');
             }
         }else
         {
-            return redirect()->back()->with('error', 'File gagal diupload! periksa kembali format dan ukuran file anda..');
+            return redirect()->back()->withInput()->with('error', 'File gagal diupload! periksa kembali format dan ukuran file anda..');
         }
     }
 
-    public function hapus_foto($id)
+    function hapus_foto($id)
     {   
         $cek = $this->m_foto->cek_foto($id);
         if($cek)

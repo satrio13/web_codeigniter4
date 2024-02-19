@@ -10,9 +10,10 @@ class Alumni extends BaseController
     function __construct()
     {   
         $this->m_alumni = new AlumniModel();
+        date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['titleweb'] = 'Alumni - '.title();
 		$data['title'] = 'Alumni';
@@ -20,7 +21,7 @@ class Alumni extends BaseController
         return view('alumni/index', $data);
     }
 
-    public function penelusuran_alumni()
+    function penelusuran_alumni()
     {
         $data['titleweb'] = 'Penelusuran Alumni - '.title();
 		$data['title'] = 'Penelusuran Alumni';
@@ -28,7 +29,7 @@ class Alumni extends BaseController
         return view('alumni/penelusuran', $data);
     }
 
-    public function simpan_penelusuran_alumni()
+    function simpan_penelusuran_alumni()
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
@@ -71,7 +72,7 @@ class Alumni extends BaseController
             return redirect()->to(base_url('alumni/penelusuran-alumni'))->with('success', 'TERIMAKASIH, DATA BERHASIL DIKIRIM');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Disimpan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Disimpan, silahkan coba lagi!');
         }
     }
 

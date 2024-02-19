@@ -17,14 +17,14 @@ class RekapUN extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Rekap UN';
         $data['data'] = $this->m_un->list_rekap_un();
         return view('admin/rekap_un/index', $data);
     }
 
-    public function tambah_rekap_un()
+    function tambah_rekap_un()
     {
         $data['title'] = 'Tambah Rekap UN';
         $data['tahun'] = $this->m_tahun->list_tahun();
@@ -32,7 +32,7 @@ class RekapUN extends BaseController
         return view('admin/rekap_un/form_tambah', $data);
     }
 
-    public function simpan_rekap_un()
+    function simpan_rekap_un()
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun Pelajaran', 'rules' => 'required|numeric'],
@@ -52,9 +52,7 @@ class RekapUN extends BaseController
             'id_kurikulum' => esc($this->request->getVar('id_kurikulum')),
             'tertinggi' => esc($this->request->getVar('tertinggi')),
             'terendah' => esc($this->request->getVar('terendah')),
-            'rata' => esc($this->request->getVar('rata')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'rata' => esc($this->request->getVar('rata'))
         ];
 
         $this->m_un->tambah_rekap_un($data);
@@ -63,11 +61,11 @@ class RekapUN extends BaseController
             return redirect()->to(base_url('backend/rekap-un'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_rekap_un($id)
+    function edit_rekap_un($id)
     {   
         $cek = $this->m_un->cek_rekap_un($id);
         if($cek)
@@ -83,7 +81,7 @@ class RekapUN extends BaseController
         }
     }
 
-    public function update_rekap_un($id)
+    function update_rekap_un($id)
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun Pelajaran', 'rules' => 'required|numeric'],
@@ -103,9 +101,7 @@ class RekapUN extends BaseController
             'id_kurikulum' => esc($this->request->getVar('id_kurikulum')),
             'tertinggi' => esc($this->request->getVar('tertinggi')),
             'terendah' => esc($this->request->getVar('terendah')),
-            'rata' => esc($this->request->getVar('rata')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'rata' => esc($this->request->getVar('rata'))
         ];
 
         $this->m_un->edit_rekap_un($data, $id);
@@ -114,11 +110,11 @@ class RekapUN extends BaseController
             return redirect()->to(base_url('backend/rekap-un'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_rekap_un($id)
+    function hapus_rekap_un($id)
     {
         $cek = $this->m_un->cek_rekap_un($id);
         if($cek)

@@ -17,21 +17,21 @@ class Alumni extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Alumni';
         $data['data'] = $this->m_alumni->list_alumni();
         return view('admin/alumni/index', $data);
     }
 
-    public function tambah_alumni()
+    function tambah_alumni()
     {
         $data['title'] = 'Tambah Alumni';
         $data['tahun'] = $this->m_tahun->list_tahun();
         return view('admin/alumni/form_tambah', $data);
     }
 
-    public function simpan_alumni()
+    function simpan_alumni()
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -47,9 +47,7 @@ class Alumni extends BaseController
         $data = [
             'id_tahun' => esc($this->request->getVar('id_tahun')),
             'jml_l' => esc($this->request->getVar('jml_l')),
-            'jml_p' => esc($this->request->getVar('jml_p')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'jml_p' => esc($this->request->getVar('jml_p'))
         ];
 
         $this->m_alumni->tambah_alumni($data);
@@ -58,11 +56,11 @@ class Alumni extends BaseController
             return redirect()->to(base_url('backend/alumni'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_alumni($id)
+    function edit_alumni($id)
     {   
         $cek = $this->m_alumni->cek_alumni($id);
         if($cek)
@@ -77,7 +75,7 @@ class Alumni extends BaseController
         }
     }
 
-    public function update_alumni($id)
+    function update_alumni($id)
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -93,9 +91,7 @@ class Alumni extends BaseController
         $data = [
             'id_tahun' => esc($this->request->getVar('id_tahun')),
             'jml_l' => esc($this->request->getVar('jml_l')),
-            'jml_p' => esc($this->request->getVar('jml_p')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'jml_p' => esc($this->request->getVar('jml_p'))
         ];
 
         $this->m_alumni->edit_alumni($data, $id);
@@ -104,11 +100,11 @@ class Alumni extends BaseController
             return redirect()->to(base_url('backend/alumni'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_alumni($id)
+    function hapus_alumni($id)
     {
         $cek = $this->m_alumni->cek_alumni($id);
         if($cek)
@@ -127,7 +123,7 @@ class Alumni extends BaseController
         }
     }
 
-    public function penelusuran_alumni()
+    function penelusuran_alumni()
     {
         $data['title'] = 'Penelusuran Alumni';
         $data['data'] = $this->m_isialumni->list_isialumni();
@@ -158,7 +154,7 @@ class Alumni extends BaseController
         echo json_encode($q);	
     }
 
-    public function hapus_penelusuran_alumni($id)
+    function hapus_penelusuran_alumni($id)
     {
         $cek = $this->m_isialumni->cek_isialumni($id);
         if($cek)

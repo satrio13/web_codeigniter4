@@ -15,21 +15,21 @@ class PrestasiSekolah extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Prestasi Sekolah';
         $data['data'] = $this->m_prestasi_sekolah->list_prestasi_sekolah();
         return view('admin/prestasi_sekolah/index', $data);
     }
 
-    public function tambah_prestasi_sekolah()
+    function tambah_prestasi_sekolah()
     {
         $data['title'] = 'Tambah Prestasi Sekolah';
         $data['tahun'] = $this->m_tahun->list_tahun();
         return view('admin/prestasi_sekolah/form_tambah', $data);
     }
 
-    public function simpan_prestasi_sekolah()
+    function simpan_prestasi_sekolah()
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -61,9 +61,7 @@ class PrestasiSekolah extends BaseController
             'tingkat' => esc($this->request->getVar('tingkat')),
             'jenis' => esc($this->request->getVar('jenis')),
             'keterangan' => esc($this->request->getVar('keterangam')),
-            'gambar' => $nama_gambar,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];
 
         $this->m_prestasi_sekolah->tambah_prestasi_sekolah($data);
@@ -72,11 +70,11 @@ class PrestasiSekolah extends BaseController
             return redirect()->to(base_url('backend/prestasi-sekolah'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_prestasi_sekolah($id)
+    function edit_prestasi_sekolah($id)
     {   
         $cek = $this->m_prestasi_sekolah->cek_prestasi_sekolah($id);
         if($cek)
@@ -91,7 +89,7 @@ class PrestasiSekolah extends BaseController
         }
     }
 
-    public function update_prestasi_sekolah($id)
+    function update_prestasi_sekolah($id)
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -138,8 +136,7 @@ class PrestasiSekolah extends BaseController
             'tingkat' => $this->request->getVar('tingkat'),
             'jenis' => $this->request->getVar('jenis'),
             'keterangan' => $this->request->getVar('keterangam'),
-            'gambar' => $nama_gambar,
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];
         
         $this->m_prestasi_sekolah->edit_prestasi_sekolah($data, $id);
@@ -148,11 +145,11 @@ class PrestasiSekolah extends BaseController
             return redirect()->to(base_url('backend/prestasi-sekolah'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_prestasi_sekolah($id)
+    function hapus_prestasi_sekolah($id)
     {   
         $cek = $this->m_prestasi_sekolah->cek_prestasi_sekolah($id);
         if($cek)

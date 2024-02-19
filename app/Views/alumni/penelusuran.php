@@ -167,7 +167,7 @@
                 foreach($data as $r):
                     if($r->gambar != '' AND file_exists("uploads/img/alumni/$r->gambar"))
                     {
-                        $img = '<a href="'.base_url("uploads/img/alumni/$r->gambar").'" target="_blank"><img src="'.base_url("uploads/img/alumni/$r->gambar").'" class="img img-fluid"></a>'; 
+                        $img = '<a href="'.base_url("uploads/img/alumni/$r->gambar").'" class="image-link"><img src="'.base_url("uploads/img/alumni/$r->gambar").'" class="img img-fluid"></a>'; 
                     }else
                     {
                         $img = '';

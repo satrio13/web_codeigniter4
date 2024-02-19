@@ -13,7 +13,7 @@ class User extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         if(session('level') == 'superadmin')
         {
@@ -26,7 +26,7 @@ class User extends BaseController
         }
     }
 
-    public function tambah_user()
+    function tambah_user()
     {
         if(session('level') == 'superadmin')
         {
@@ -38,7 +38,7 @@ class User extends BaseController
         }
     }
    
-    public function simpan_user()
+    function simpan_user()
     {
         if(session('level') == 'superadmin')
         {
@@ -62,9 +62,7 @@ class User extends BaseController
                 'password' => password_hash($this->request->getVar('password1'), PASSWORD_DEFAULT),
                 'email' => esc($this->request->getVar('email')),
                 'level' => 'admin',
-                'is_active' => esc($this->request->getVar('is_active')),
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'is_active' => esc($this->request->getVar('is_active'))
             ];
 
             $this->m_user->tambah_user($data);
@@ -73,7 +71,7 @@ class User extends BaseController
                 return redirect()->to(base_url('backend/users'))->with('success', 'Data Berhasil Ditambahkan');
             }else
             {
-                return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+                return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
             }
         }else
         {
@@ -81,7 +79,7 @@ class User extends BaseController
         }
     }
 
-    public function edit_user($id)
+    function edit_user($id)
     {   
         if(session('level') == 'superadmin')
         {
@@ -101,7 +99,7 @@ class User extends BaseController
         }
     }
 
-    public function update_user($id)
+    function update_user($id)
     {
         if(session('level') == 'superadmin')
         {
@@ -138,8 +136,7 @@ class User extends BaseController
                     'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                     'email' => esc($this->request->getVar('email')),
                     'level' => 'admin',
-                    'is_active' => esc($this->request->getVar('is_active')),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'is_active' => esc($this->request->getVar('is_active'))
                 ];
             }else
             {
@@ -172,8 +169,7 @@ class User extends BaseController
                     'username' => $this->request->getVar('username'),
                     'email' => $this->request->getVar('email'),
                     'level' => 'admin',
-                    'is_active' => $this->request->getVar('is_active'),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'is_active' => $this->request->getVar('is_active')
                 ];
             }
 
@@ -183,7 +179,7 @@ class User extends BaseController
                 return redirect()->to(base_url('backend/users'))->with('success', 'Data Berhasil Diupdate');
             }else
             {
-                return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+                return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
             }
         }else
         {
@@ -191,7 +187,7 @@ class User extends BaseController
         }
     }
     
-    public function hapus_user($id)
+    function hapus_user($id)
     {   
         if(session('level') == 'superadmin')
         {
@@ -216,7 +212,7 @@ class User extends BaseController
         }
     }
 
-    public function edit_profil()
+    function edit_profil()
     {   
         $id = session('id_user');
         $data['title'] = 'Edit Profil';
@@ -224,7 +220,7 @@ class User extends BaseController
         return view('admin/user/form_profil', $data);
     }
 
-    public function update_profil()
+    function update_profil()
     {
         $id = session('id_user');
         $this->rules->setRules([
@@ -253,8 +249,7 @@ class User extends BaseController
         $data = [
             'nama' => $this->request->getVar('nama'),
             'username' => $this->request->getVar('username'),
-            'email' => $this->request->getVar('email'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'email' => $this->request->getVar('email')
         ];
 
         $this->m_user->edit_user($data, $id);
@@ -263,11 +258,11 @@ class User extends BaseController
             return redirect()->back()->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function ganti_password()
+    function ganti_password()
     {   
         $id = session('id_user');
         $get = $this->m_user->get_user($id);
@@ -276,7 +271,7 @@ class User extends BaseController
         return view('admin/user/ganti_password', $data);
     }
 
-    public function update_password()
+    function update_password()
     {   
         $id = session('id_user');
         $get = $this->m_user->get_user($id);
@@ -294,10 +289,10 @@ class User extends BaseController
 
         if(!password_verify($this->request->getVar('password3'), $get->password))
         {
-            return redirect()->back()->with('error', 'Password lama yang anda inputkan salah!');
+            return redirect()->back()->withInput()->with('error', 'Password lama yang anda inputkan salah!');
         }elseif(password_verify($this->request->getVar('password1'), $get->password))
         {
-            return redirect()->back()->with('error', 'Password baru yang anda inputkan sama dengan password lama!');
+            return redirect()->back()->withInput()->with('error', 'Password baru yang anda inputkan sama dengan password lama!');
         }else
         {   
             $data = [
@@ -310,7 +305,7 @@ class User extends BaseController
                 echo '<script type="text/javascript">alert("Password berhasil dirubah");window.location.replace("'.base_url().'auth/logout")</script>';
             }else
             {
-                return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+                return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
             }   
         }
     }

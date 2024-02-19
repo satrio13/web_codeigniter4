@@ -514,7 +514,7 @@
                 <div class="row m-1 border">
                     <div class="col-md-12 text-center">
                         <a href="<?= base_url('pengaduan'); ?>" title="Klik Disini untuk menuju halaman pengaduan <?= title(); ?>">
-                            <img src="<?= base_url("assets/file/pengaduan.png"); ?>" class="img img-fluid mt-2 mb-2" style="height: 70px; object-fit: contain;">
+                            <img src="<?= base_url("uploads/file/pengaduan.png"); ?>" class="img img-fluid mt-2 mb-2" style="height: 70px; object-fit: contain;">
                         </a>
                     </div>
                 </div>    

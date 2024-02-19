@@ -12,9 +12,13 @@ class PengaduanModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = false;
-    protected $allowedFields    = [];
+    
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 
-    public function simpan_pengaduan($data)
+    function simpan_pengaduan($data)
     {
         $this->insert($data);
     }

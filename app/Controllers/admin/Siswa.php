@@ -15,14 +15,14 @@ class Siswa extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Peserta Didik';
         $data['data'] = $this->m_siswa->list_siswa();
         return view('admin/siswa/index', $data);
     }
 
-    public function tambah_siswa()
+    function tambah_siswa()
     {
         $data['title'] = 'Tambah Peserta Didik';
         $data['tahun'] = $this->m_tahun->list_tahun();
@@ -30,7 +30,7 @@ class Siswa extends BaseController
         return view('admin/siswa/form_tambah', $data);
     }
     
-    public function simpan_siswa()
+    function simpan_siswa()
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -54,9 +54,7 @@ class Siswa extends BaseController
             'jml2pa' => esc($this->request->getVar('jml2pa')),
             'jml2pi' => esc($this->request->getVar('jml2pi')),
             'jml3pa' => esc($this->request->getVar('jml3pa')),
-            'jml3pi' => esc($this->request->getVar('jml3pi')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'jml3pi' => esc($this->request->getVar('jml3pi'))
         ];
 
         $this->m_siswa->tambah_siswa($data);
@@ -65,11 +63,11 @@ class Siswa extends BaseController
             return redirect()->to(base_url('backend/siswa'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_siswa($id)
+    function edit_siswa($id)
     {   
         $cek = $this->m_siswa->cek_siswa($id);
         if($cek)
@@ -85,7 +83,7 @@ class Siswa extends BaseController
         }
     }
 
-    public function update_siswa($id)
+    function update_siswa($id)
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -109,8 +107,7 @@ class Siswa extends BaseController
             'jml2pa' => esc($this->request->getVar('jml2pa')),
             'jml2pi' => esc($this->request->getVar('jml2pi')),
             'jml3pa' => esc($this->request->getVar('jml3pa')),
-            'jml3pi' => esc($this->request->getVar('jml3pi')),
-            'updated_at' => date('Y-m-d H:i:s')
+            'jml3pi' => esc($this->request->getVar('jml3pi'))
         ];
 
         $this->m_siswa->edit_siswa($data, $id);
@@ -119,11 +116,11 @@ class Siswa extends BaseController
             return redirect()->to(base_url('backend/siswa'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_siswa($id)
+    function hapus_siswa($id)
     {
         $cek = $this->m_siswa->cek_siswa($id);
         if($cek)

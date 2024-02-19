@@ -14,7 +14,7 @@ class VideoModel extends Model
     protected $protectFields    = false;
     protected $allowedFields    = [];
 
-    public function list_video($page)
+    function list_video($page)
     {
         return $this->orderBy('updated_at','desc')->paginate($page);
     }

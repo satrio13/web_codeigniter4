@@ -12,7 +12,7 @@ class Siswa extends BaseController
         $this->m_siswa = new SiswaModel();
     }
 
-    public function index()
+    function index()
     {
 		$data['titleweb'] = 'Peserta Didik - '.title();
 		$data['title'] = 'Peserta Didik';

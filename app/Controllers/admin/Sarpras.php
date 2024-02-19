@@ -13,21 +13,21 @@ class Sarpras extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Sarana & Prasarana';
         $data['data'] = $this->m_sarpras->get_sarpras();
         return view('admin/sarpras/index', $data);
     }
 
-    public function edit_sarpras()
+    function edit_sarpras()
     {
         $data['title'] = 'Edit Sarana & Prasarana';
         $data['data'] = $this->m_sarpras->get_sarpras();
         return view('admin/sarpras/form_sarpras', $data);
     }
 
-    public function update_sarpras()
+    function update_sarpras()
     {
         $this->rules->setRules([
             'isi' => ['label' => 'Isi', 'rules' => 'required'],
@@ -39,8 +39,7 @@ class Sarpras extends BaseController
         }
             
         $data = [
-            'isi' => $this->request->getVar('isi'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'isi' => $this->request->getVar('isi')
         ];
 
         $this->m_sarpras->edit_sarpras($data);
@@ -49,7 +48,7 @@ class Sarpras extends BaseController
             return redirect()->to(base_url('backend/sarpras'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 }

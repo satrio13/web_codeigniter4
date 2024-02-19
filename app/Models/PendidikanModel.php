@@ -6,22 +6,22 @@ use CodeIgniter\Model;
 
 class PendidikanModel extends Model
 {
-    public function tampiL_kurikulum_a()
+    function tampil_kurikulum_a()
     {
-        return $this->db->table('tb_kurikulum')->select('*')->where('is_active', 1)->where('kelompok', 'A')->orderBy('no_urut','asc')->get()->getResult(); 
+        return $this->db->table('tb_kurikulum')->where('is_active', 1)->where('kelompok', 'A')->orderBy('no_urut','asc')->get()->getResult(); 
     }
 
-    public function tampiL_kurikulum_b()
+    function tampil_kurikulum_b()
     {
-        return $this->db->table('tb_kurikulum')->select('*')->where('is_active', 1)->where('kelompok', 'B')->orderBy('no_urut','asc')->get()->getResult(); 
+        return $this->db->table('tb_kurikulum')->where('is_active', 1)->where('kelompok', 'B')->orderBy('no_urut','asc')->get()->getResult(); 
     }
 
-    public function tampiL_kurikulum_c()
+    function tampil_kurikulum_c()
     {
-        return $this->db->table('tb_kurikulum')->select('*')->where('is_active', 1)->where('kelompok', 'C')->orderBy('no_urut','asc')->get()->getResult(); 
+        return $this->db->table('tb_kurikulum')->where('is_active', 1)->where('kelompok', 'C')->orderBy('no_urut','asc')->get()->getResult(); 
     }
 
-    public function tampiL_kalender()
+    function tampil_kalender()
     {
         return $this->db->table('tb_kalender')->getWhere(['id' => 1])->getRow(); 
     }

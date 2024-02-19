@@ -13,7 +13,7 @@ class LinkModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = false;
 
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

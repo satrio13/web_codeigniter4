@@ -13,23 +13,23 @@ class Berita extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Berita';
         $data['data'] = $this->m_berita->list_berita();
         return view('admin/berita/index', $data);
     }
 
-    public function tambah_berita()
+    function tambah_berita()
     {
         $data['title'] = 'Tambah Berita';
         return view('admin/berita/form_tambah', $data);
     }
 
-    public function simpan_berita()
+    function simpan_berita()
     {
         $this->rules->setRules([
-            'nama' => ['label' => 'Nama', 'rules' => 'required|min_length[100]'],
+            'nama' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
             'isi' =>  ['label' => 'Isi', 'rules' => 'required'],
             'is_active' =>  ['label' => 'Status', 'rules' => 'required'],
             //'gambar' => ['label' => 'Gambar', 'rules' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]'],
@@ -57,9 +57,7 @@ class Berita extends BaseController
             'is_active' => esc($this->request->getVar('is_active')),
             'hari' => hari_ini_indo(),
             'tgl' => tgl_jam_simpan_sekarang(),
-            'slug' => slug(esc($this->request->getVar('nama'))),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('nama')))
         ];
 
         $this->m_berita->tambah_berita($data);
@@ -68,11 +66,11 @@ class Berita extends BaseController
             return redirect()->to(base_url('backend/berita'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_berita($id)
+    function edit_berita($id)
     {   
         $cek = $this->m_berita->cek_berita($id);
         if($cek)
@@ -86,7 +84,7 @@ class Berita extends BaseController
         }
     }
 
-    public function update_berita($id)
+    function update_berita($id)
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
@@ -131,8 +129,7 @@ class Berita extends BaseController
             'is_active' => esc($this->request->getVar('is_active')),
             'hari' => hari_ini_indo(),
             'tgl' => tgl_jam_simpan_sekarang(),
-            'slug' => slug(esc($this->request->getVar('nama'))),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('nama')))
         ];
         
         $this->m_berita->edit_berita($data, $id);
@@ -141,11 +138,11 @@ class Berita extends BaseController
             return redirect()->to(base_url('backend/berita'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_berita($id)
+    function hapus_berita($id)
     {   
         $cek = $this->m_berita->cek_berita($id);
         if($cek)

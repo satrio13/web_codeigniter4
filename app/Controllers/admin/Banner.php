@@ -13,20 +13,20 @@ class Banner extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Banner';
         $data['data'] = $this->m_banner->list_banner();
         return view('admin/banner/index', $data);
     }
 
-    public function tambah_banner()
+    function tambah_banner()
     {
         $data['title'] = 'Tambah Banner';
         return view('admin/banner/form_tambah', $data);
     }
 
-    public function simpan_banner()
+    function simpan_banner()
     {
         $this->rules->setRules([
             'is_active' =>  ['label' => 'Status', 'rules' => 'required'],
@@ -46,7 +46,7 @@ class Banner extends BaseController
             $gambar->move('uploads/img/banner', $nama_gambar);
         }else
         {
-            return redirect()->back()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
         }
     
         $data = [
@@ -55,9 +55,7 @@ class Banner extends BaseController
             'keterangan' => esc($this->request->getVar('keterangan')),
             'link' => esc($this->request->getVar('link')),
             'button' => esc($this->request->getVar('button')),
-            'is_active' => esc($this->request->getVar('is_active')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'is_active' => esc($this->request->getVar('is_active'))
         ];
         
         $this->m_banner->tambah_banner($data);
@@ -66,11 +64,11 @@ class Banner extends BaseController
             return redirect()->to(base_url('backend/banner'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function edit_banner($id)
+    function edit_banner($id)
     {   
         $cek = $this->m_banner->cek_banner($id);
         if($cek)
@@ -84,7 +82,7 @@ class Banner extends BaseController
         }
     }
 
-    public function update_banner($id)
+    function update_banner($id)
     {
         $this->rules->setRules([
             'is_active' =>  ['label' => 'Status', 'rules' => 'required'],
@@ -125,8 +123,7 @@ class Banner extends BaseController
             'keterangan' => esc($this->request->getVar('keterangan')),
             'link' => esc($this->request->getVar('link')),
             'button' => esc($this->request->getVar('button')),
-            'is_active' => esc($this->request->getVar('is_active')),
-            'updated_at' => date('Y-m-d H:i:s')
+            'is_active' => esc($this->request->getVar('is_active'))
         ];
         
         $this->m_banner->edit_banner($data, $id);
@@ -135,11 +132,11 @@ class Banner extends BaseController
             return redirect()->to(base_url('backend/banner'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_banner($id)
+    function hapus_banner($id)
     {   
         $cek = $this->m_banner->cek_banner($id);
         if($cek)

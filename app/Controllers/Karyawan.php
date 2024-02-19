@@ -12,7 +12,7 @@ class Karyawan extends BaseController
         $this->m_karyawan = new KaryawanModel();
     }
 
-    public function index()
+    function index()
     {
 		$data['titleweb'] = 'Karyawan - '.title();
 		$data['title'] = 'Karyawan';
@@ -20,7 +20,7 @@ class Karyawan extends BaseController
         return view('karyawan/index', $data);
     }
 
-    public function detail($id)
+    function detail($id)
     {   
         $cek = $this->m_karyawan->cek_karyawan($id);
         if($cek)

@@ -10,9 +10,10 @@ class Pengaduan extends BaseController
     function __construct()
     {   
         $this->m_pengaduan = new PengaduanModel();
+        date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['titleweb'] = 'Layanan Pengaduan - '.title();
 		$data['title'] = 'Layanan Pengaduan';
@@ -35,9 +36,7 @@ class Pengaduan extends BaseController
         $data = [
             'nama' => esc($this->request->getVar('nama')),
             'status' => esc($this->request->getVar('status')),
-            'isi' => esc($this->request->getVar('isi')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'isi' => esc($this->request->getVar('isi'))
         ];
 
         $this->m_pengaduan->simpan_pengaduan($data);
@@ -46,7 +45,7 @@ class Pengaduan extends BaseController
             return redirect()->to(base_url('pengaduan'))->with('success', 'TERIMAKASIH, DATA BERHASIL DIKIRIM');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Disimpan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Disimpan, silahkan coba lagi!');
         }
     }
     

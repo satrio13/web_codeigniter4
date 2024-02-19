@@ -12,7 +12,7 @@ class Guru extends BaseController
         $this->m_guru = new GuruModel();
     }
 
-    public function index()
+    function index()
     {
 		$data['titleweb'] = 'Guru - '.title();
 		$data['title'] = 'Guru';
@@ -20,7 +20,7 @@ class Guru extends BaseController
         return view('guru/index', $data);
     }
 
-    public function detail($id)
+    function detail($id)
     {   
         $cek = $this->m_guru->cek_guru($id);
         if($cek)

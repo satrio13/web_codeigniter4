@@ -345,7 +345,7 @@
                 },
                 error: function (request)
                 {
-                    alert_gagal('An error occurred during your request: '+  request.status + ' ' + request.statusText + 'Please Try Again!!');
+                    alert('An error occurred during your request: '+  request.status + ' ' + request.statusText + 'Please Try Again!!');
                 }
             });
         }

@@ -15,21 +15,21 @@ class PrestasiSiswa extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Prestasi Siswa';
         $data['data'] = $this->m_prestasi_siswa->list_prestasi_siswa();
         return view('admin/prestasi_siswa/index', $data);
     }
 
-    public function tambah_prestasi_siswa()
+    function tambah_prestasi_siswa()
     {
         $data['title'] = 'Tambah Prestasi Siswa';
         $data['tahun'] = $this->m_tahun->list_tahun();
         return view('admin/prestasi_siswa/form_tambah', $data);
     }
 
-    public function simpan_prestasi_siswa()
+    function simpan_prestasi_siswa()
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -65,9 +65,7 @@ class PrestasiSiswa extends BaseController
             'tingkat' => esc($this->request->getVar('tingkat')),
             'jenis' => esc($this->request->getVar('jenis')),
             'keterangan' => esc($this->request->getVar('keterangam')),
-            'gambar' => $nama_gambar,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];
 
         $this->m_prestasi_siswa->tambah_prestasi_siswa($data);
@@ -76,11 +74,11 @@ class PrestasiSiswa extends BaseController
             return redirect()->to(base_url('backend/prestasi-siswa'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_prestasi_siswa($id)
+    function edit_prestasi_siswa($id)
     {   
         $cek = $this->m_prestasi_siswa->cek_prestasi_siswa($id);
         if($cek)
@@ -95,7 +93,7 @@ class PrestasiSiswa extends BaseController
         }
     }
 
-    public function update_prestasi_siswa($id)
+    function update_prestasi_siswa($id)
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -146,8 +144,7 @@ class PrestasiSiswa extends BaseController
             'tingkat' => esc($this->request->getVar('tingkat')),
             'jenis' => esc($this->request->getVar('jenis')),
             'keterangan' => esc($this->request->getVar('keterangam')),
-            'gambar' => $nama_gambar,
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];
         
         $this->m_prestasi_siswa->edit_prestasi_siswa($data, $id);
@@ -156,11 +153,11 @@ class PrestasiSiswa extends BaseController
             return redirect()->to(base_url('backend/prestasi-siswa'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_prestasi_siswa($id)
+    function hapus_prestasi_siswa($id)
     {   
         $cek = $this->m_prestasi_siswa->cek_prestasi_siswa($id);
         if($cek)

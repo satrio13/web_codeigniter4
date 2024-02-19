@@ -13,20 +13,20 @@ class Pengumuman extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Pengumuman';
         $data['data'] = $this->m_pengumuman->list_pengumuman();
         return view('admin/pengumuman/index', $data);
     }
 
-    public function tambah_pengumuman()
+    function tambah_pengumuman()
     {
         $data['title'] = 'Tambah Pengumuman';
         return view('admin/pengumuman/form_tambah', $data);
     }
 
-    public function simpan_pengumuman()
+    function simpan_pengumuman()
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
@@ -57,22 +57,20 @@ class Pengumuman extends BaseController
             'is_active' => esc($this->request->getVar('is_active')),
             'hari' => hari_ini_indo(),
             'tgl' => tgl_jam_simpan_sekarang(),
-            'slug' => slug(esc($this->request->getVar('nama'))),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('nama')))
         ];
-
+ 
         $this->m_pengumuman->tambah_pengumuman($data);
         if($this->db->affectedRows() > 0)
         {
             return redirect()->to(base_url('backend/pengumuman'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_pengumuman($id)
+    function edit_pengumuman($id)
     {   
         $cek = $this->m_pengumuman->cek_pengumuman($id);
         if($cek)
@@ -86,7 +84,7 @@ class Pengumuman extends BaseController
         }
     }
 
-    public function update_pengumuman($id)
+    function update_pengumuman($id)
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama', 'rules' => 'required|max_length[100]'],
@@ -131,8 +129,7 @@ class Pengumuman extends BaseController
             'is_active' => esc($this->request->getVar('is_active')),
             'hari' => hari_ini_indo(),
             'tgl' => tgl_jam_simpan_sekarang(),
-            'slug' => slug(esc($this->request->getVar('nama'))),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('nama')))
         ];
         
         $this->m_pengumuman->edit_pengumuman($data, $id);
@@ -141,11 +138,11 @@ class Pengumuman extends BaseController
             return redirect()->to(base_url('backend/pengumuman'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_pengumuman($id)
+    function hapus_pengumuman($id)
     {   
         $cek = $this->m_pengumuman->cek_pengumuman($id);
         if($cek)

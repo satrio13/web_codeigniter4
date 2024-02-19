@@ -335,18 +335,18 @@
         <?= $this->renderSection('content'); ?>
         <footer class="main-footer">
             <strong> 
-            <?php
-            $tahun_dibuat = '2021';
-            $tahun_sekarang = date('Y');
-            if($tahun_dibuat < $tahun_sekarang)
-            {
-                echo'&copy '.$tahun_dibuat.' - '.$tahun_sekarang.' ';  
-            }else
-            {
-                echo'&copy '.$tahun_sekarang.' ';
-            }
-            ?>
-            <a href="javascript:void(0)"><?= title(); ?></a>
+                <?php
+                $tahun_dibuat = '2021';
+                $tahun_sekarang = date('Y');
+                if($tahun_dibuat < $tahun_sekarang)
+                {
+                    echo'&copy '.$tahun_dibuat.' - '.$tahun_sekarang.' ';  
+                }else
+                {
+                    echo'&copy '.$tahun_sekarang.' ';
+                }
+                ?>
+                <a href="javascript:void(0)"><?= title(); ?></a>
             </strong>
         </footer>
         <aside class="control-sidebar control-sidebar-dark"></aside>

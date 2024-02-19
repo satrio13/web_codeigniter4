@@ -13,21 +13,21 @@ class Profil extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Profil Website';
         $data['data'] = $this->m_profil->get_profil();
         return view('admin/profil/index', $data);
     }
 
-    public function edit_profil_web()
+    function edit_profil_web()
     {
         $data['title'] = 'Edit Profil Website';
         $data['data'] = $this->m_profil->get_profil();
         return view('admin/profil/form_profil_web', $data);
     }
 
-    public function update_profil_web()
+    function update_profil_web()
     {
         $this->rules->setRules([
             'nama_web' =>  ['label' => 'Nama Website', 'rules' => 'required|max_length[100]'],
@@ -72,8 +72,7 @@ class Profil extends BaseController
             'instagram' => esc($this->request->getVar('instagram')),
             'facebook' => esc($this->request->getVar('facebook')),
             'twitter' => esc($this->request->getVar('twitter')),
-            'youtube' => esc($this->request->getVar('youtube')),
-            'updated_at' => date('Y-m-d H:i:s')
+            'youtube' => esc($this->request->getVar('youtube'))
         ];
 
         $this->m_profil->update_profil($data);
@@ -82,18 +81,18 @@ class Profil extends BaseController
             return redirect()->to(base_url('backend/profil-web'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function logo_web()
+    function logo_web()
     {
         $data['title'] = 'Edit Logo Website';
         $data['data'] = $this->m_profil->get_profil('logo_web');
         return view('admin/profil/form_logo_web', $data);
     }
 
-    public function update_logo_web()
+    function update_logo_web()
     {
         $get = $this->m_profil->get_profil('logo_web');
         $gambar = $this->request->getFile('logo_web');
@@ -118,7 +117,7 @@ class Profil extends BaseController
             }
         }else
         {
-            return redirect()->back()->with('error', 'Anda belum memilih file yang akan diupload!');
+            return redirect()->back()->withInput()->with('error', 'Anda belum memilih file yang akan diupload!');
         }
     
         $data = [
@@ -131,18 +130,18 @@ class Profil extends BaseController
             return redirect()->to(base_url('backend/profil-web'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function favicon()
+    function favicon()
     {
         $data['title'] = 'Edit Favicon';
         $data['data'] = $this->m_profil->get_profil('favicon');
         return view('admin/profil/form_favicon', $data);
     }
 
-    public function update_favicon()
+    function update_favicon()
     {
         $get = $this->m_profil->get_profil('favicon');
         $gambar = $this->request->getFile('favicon');
@@ -167,7 +166,7 @@ class Profil extends BaseController
             }
         }else
         {
-            return redirect()->back()->with('error', 'Anda belum memilih file yang akan diupload!');
+            return redirect()->back()->withInput()->with('error', 'Anda belum memilih file yang akan diupload!');
         }
     
         $data = [
@@ -180,18 +179,18 @@ class Profil extends BaseController
             return redirect()->to(base_url('backend/profil-web'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function logo_admin()
+    function logo_admin()
     {
         $data['title'] = 'Edit Logo Admin';
         $data['data'] = $this->m_profil->get_profil('logo_admin');
         return view('admin/profil/form_logo_admin', $data);
     }
 
-    public function update_logo_admin()
+    function update_logo_admin()
     {
         $get = $this->m_profil->get_profil('logo_admin');
         $gambar = $this->request->getFile('logo_admin');
@@ -216,7 +215,7 @@ class Profil extends BaseController
             }
         }else
         {
-            return redirect()->back()->with('error', 'Anda belum memilih file yang akan diupload!');
+            return redirect()->back()->withInput()->with('error', 'Anda belum memilih file yang akan diupload!');
         }
     
         $data = [
@@ -229,18 +228,18 @@ class Profil extends BaseController
             return redirect()->to(base_url('backend/profil-web'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function gambar_profil()
+    function gambar_profil()
     {
         $data['title'] = 'Edit Gambar Profil';
         $data['data'] = $this->m_profil->get_profil('gambar');
         return view('admin/profil/form_gambar', $data);
     }
 
-    public function update_gambar_profil()
+    function update_gambar_profil()
     {
         $get = $this->m_profil->get_profil('gambar');
         $gambar = $this->request->getFile('gambar');
@@ -265,7 +264,7 @@ class Profil extends BaseController
             }
         }else
         {
-            return redirect()->back()->with('error', 'Anda belum memilih file yang akan diupload!');
+            return redirect()->back()->withInput()->with('error', 'Anda belum memilih file yang akan diupload!');
         }
     
         $data = [
@@ -278,18 +277,18 @@ class Profil extends BaseController
             return redirect()->to(base_url('backend/profil-web'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function file()
+    function file()
     {
         $data['title'] = 'Edit File';
         $data['data'] = $this->m_profil->get_profil('file');
         return view('admin/profil/form_file', $data);
     }
 
-    public function update_file()
+    function update_file()
     {
         $get = $this->m_profil->get_profil('file');
         $gambar = $this->request->getFile('file');
@@ -314,7 +313,7 @@ class Profil extends BaseController
             }
         }else
         {
-            return redirect()->back()->with('error', 'Anda belum memilih file yang akan diupload!');
+            return redirect()->back()->withInput()->with('error', 'Anda belum memilih file yang akan diupload!');
         }
     
         $data = [
@@ -327,7 +326,7 @@ class Profil extends BaseController
             return redirect()->to(base_url('backend/profil-web'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'File Gagal Diupdate, silahkan coba lagi!');
         }
     }
 

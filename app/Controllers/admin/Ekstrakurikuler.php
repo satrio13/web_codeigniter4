@@ -13,20 +13,20 @@ class Ekstrakurikuler extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Ekstrakurikuler';
         $data['data'] = $this->m_ekstrakurikuler->list_ekstrakurikuler();
         return view('admin/ekstrakurikuler/index', $data);
     }
 
-    public function tambah_ekstrakurikuler()
+    function tambah_ekstrakurikuler()
     {
         $data['title'] = 'Tambah Ekstrakurikuler';
         return view('admin/ekstrakurikuler/form_tambah', $data);
     }
 
-    public function simpan_ekstrakurikuler()
+    function simpan_ekstrakurikuler()
     {
         $this->rules->setRules([
             'nama_ekstrakurikuler' => ['label' => 'Nama Ekstrakurikuler', 'rules' => 'required|max_length[100]'],
@@ -50,9 +50,7 @@ class Ekstrakurikuler extends BaseController
             'nama_ekstrakurikuler' => esc($this->request->getVar('nama_ekstrakurikuler')),
             'keterangan' => esc($this->request->getVar('keterangan')),
             'gambar' => $nama_gambar,
-            'slug' => slug(esc($this->request->getVar('nama_ekstrakurikuler'))),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('nama_ekstrakurikuler')))
         ];
 
         $this->m_ekstrakurikuler->tambah_ekstrakurikuler($data);
@@ -61,11 +59,11 @@ class Ekstrakurikuler extends BaseController
             return redirect()->to(base_url('backend/ekstrakurikuler'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_ekstrakurikuler($id)
+    function edit_ekstrakurikuler($id)
     {   
         $cek = $this->m_ekstrakurikuler->cek_ekstrakurikuler($id);
         if($cek)
@@ -79,7 +77,7 @@ class Ekstrakurikuler extends BaseController
         }
     }
     
-    public function update_ekstrakurikuler($id)
+    function update_ekstrakurikuler($id)
     {
         $this->rules->setRules([
             'nama_ekstrakurikuler' => ['label' => 'Nama Ekstrakurikuler', 'rules' => 'required|max_length[100]'],
@@ -118,9 +116,7 @@ class Ekstrakurikuler extends BaseController
             'nama_ekstrakurikuler' => esc($this->request->getVar('nama_ekstrakurikuler')),
             'keterangan' => esc($this->request->getVar('keterangan')),
             'gambar' => $nama_gambar,
-            'slug' => slug(esc($this->request->getVar('nama_ekstrakurikuler'))),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('nama_ekstrakurikuler')))
         ];
         
         $this->m_ekstrakurikuler->edit_ekstrakurikuler($data, $id);
@@ -129,11 +125,11 @@ class Ekstrakurikuler extends BaseController
             return redirect()->to(base_url('backend/ekstrakurikuler'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_ekstrakurikuler($id)
+    function hapus_ekstrakurikuler($id)
     {   
         $cek = $this->m_ekstrakurikuler->cek_ekstrakurikuler($id);
         if($cek)

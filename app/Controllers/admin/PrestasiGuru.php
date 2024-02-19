@@ -15,21 +15,21 @@ class PrestasiGuru extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Prestasi Guru';
         $data['data'] = $this->m_prestasi_guru->list_prestasi_guru();
         return view('admin/prestasi_guru/index', $data);
     }
 
-    public function tambah_prestasi_guru()
+    function tambah_prestasi_guru()
     {
         $data['title'] = 'Tambah Prestasi Guru';
         $data['tahun'] = $this->m_tahun->list_tahun();
         return view('admin/prestasi_guru/form_tambah', $data);
     }
 
-    public function simpan_prestasi_guru()
+    function simpan_prestasi_guru()
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -63,9 +63,7 @@ class PrestasiGuru extends BaseController
             'tingkat' => esc($this->request->getVar('tingkat')),
             'jenis' => esc($this->request->getVar('jenis')),
             'keterangan' => esc($this->request->getVar('keterangam')),
-            'gambar' => $nama_gambar,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];
 
         $this->m_prestasi_guru->tambah_prestasi_guru($data);
@@ -74,11 +72,11 @@ class PrestasiGuru extends BaseController
             return redirect()->to(base_url('backend/prestasi-guru'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_prestasi_guru($id)
+    function edit_prestasi_guru($id)
     {   
         $cek = $this->m_prestasi_guru->cek_prestasi_guru($id);
         if($cek)
@@ -93,7 +91,7 @@ class PrestasiGuru extends BaseController
         }
     }
 
-    public function update_prestasi_guru($id)
+    function update_prestasi_guru($id)
     {
         $this->rules->setRules([
             'id_tahun' => ['label' => 'Tahun', 'rules' => 'required|numeric'],
@@ -142,8 +140,7 @@ class PrestasiGuru extends BaseController
             'tingkat' => esc($this->request->getVar('tingkat')),
             'jenis' => esc($this->request->getVar('jenis')),
             'keterangan' => esc($this->request->getVar('keterangam')),
-            'gambar' => $nama_gambar,
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];
 
         $this->m_prestasi_guru->edit_prestasi_guru($data, $id);
@@ -152,11 +149,11 @@ class PrestasiGuru extends BaseController
             return redirect()->to(base_url('backend/prestasi-guru'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_prestasi_guru($id)
+    function hapus_prestasi_guru($id)
     {   
         $cek = $this->m_prestasi_guru->cek_prestasi_guru($id);
         if($cek)

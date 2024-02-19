@@ -14,12 +14,7 @@ class Galeri extends BaseController
         $this->m_video = new VideoModel();
     }
 
-    public function index()
-    {
-        show_404();
-    }
-
-    public function foto()
+    function foto()
     {
         $data['titleweb'] = 'Galeri Foto - '.title();
 		$data['title'] = 'Foto';
@@ -28,7 +23,7 @@ class Galeri extends BaseController
         return view('galeri/foto', $data);
     }
 
-    public function album($slug)
+    function album($slug)
     {
         $cek = $this->m_album->cek_album($slug);
         if($cek)
@@ -44,7 +39,7 @@ class Galeri extends BaseController
         }   
     }
 
-    public function video()
+    function video()
     {
         $data['titleweb'] = 'Galeri Video - '.title();
 		$data['title'] = 'Video';

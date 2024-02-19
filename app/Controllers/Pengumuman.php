@@ -14,7 +14,7 @@ class Pengumuman extends BaseController
         $this->m_home = new HomeModel();
     }
 
-    public function index()
+    function index()
     {
 		$data['titleweb'] = 'Pengumuman - '.title();
 		$data['title'] = 'Pengumuman';
@@ -32,20 +32,21 @@ class Pengumuman extends BaseController
         return view('pengumuman/index', $data);
     }
 
-    public function detail($slug)
+    function detail($slug)
     {
         $cek = $this->m_pengumuman->cek_pengumuman($slug);
         if($cek)
         {
-            $data['titleweb'] = 'Pengumuman - '.title();
-            $data['title'] = 'Pengumuman';
+            $get = $this->m_pengumuman->detail_pengumuman($slug);
+            $data['titleweb'] = $get->nama.' - '.title();
+			$data['title'] = $get->nama;
 
             $upd = [
                 'dibaca' => $cek->dibaca + 1
             ];
             
             $this->m_pengumuman->update_dibaca($upd, $slug);
-            $data['data'] = $this->m_pengumuman->detail_pengumuman($slug);
+            $data['data'] = $get;
             $data['berita_populer'] = $this->m_home->berita_populer($slug);
             $data['link_terkait'] = $this->m_home->link_terkait();
             return view('pengumuman/detail', $data);

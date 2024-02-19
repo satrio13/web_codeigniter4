@@ -35,7 +35,7 @@
                         <?= csrf_field(); ?>
                             <div class="card-body">
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">NAMA ALBUM<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 col-form-label">NAMA ALBUM <span class="text-danger">*</span></label>
                                     <div class="col-sm-5">
                                         <input type="text" name="album" maxlength="50" value="<?= set_value('album'); ?>" class="form-control" placeholder="NAMA HALAMAN" required>
                                         <small class="text-danger">

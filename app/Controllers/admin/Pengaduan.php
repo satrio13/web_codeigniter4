@@ -13,14 +13,14 @@ class Pengaduan extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Pengaduan';
         $data['data'] = $this->m_pengaduan->list_pengaduan();
         return view('admin/pengaduan/index', $data);
     }
 
-    public function detail_pengaduan($id)
+    function detail_pengaduan($id)
     {   
         $cek = $this->m_pengaduan->cek_pengaduan($id);
         if($cek)
@@ -40,7 +40,7 @@ class Pengaduan extends BaseController
         echo json_encode($data);
     }
 
-    public function hapus_pengaduan($id)
+    function hapus_pengaduan($id)
     {   
         $cek = $this->m_pengaduan->cek_pengaduan($id);
         if($cek)

@@ -13,20 +13,20 @@ class Guru extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Guru';
         $data['data'] = $this->m_guru->list_guru();
         return view('admin/guru/index', $data);
     }
 
-    public function tambah_guru()
+    function tambah_guru()
     {
         $data['title'] = 'Tambah Guru';
         return view('admin/guru/form_tambah', $data);
     }
 
-    public function simpan_guru()
+    function simpan_guru()
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama Lengkap', 'rules' => 'required|max_length[100]'],
@@ -36,7 +36,7 @@ class Guru extends BaseController
             'statuspeg' =>  ['label' => 'Status Pegawai', 'rules' => 'required|max_length[5]'],
             'status' =>  ['label' => 'Status', 'rules' => 'required|max_length[10]'],
             'statusguru' =>  ['label' => 'Status', 'rules' => 'required|max_length[12]'],
-            'email' =>  ['label' => 'Email', 'rules' => 'trim|valid_email|max_length[100]'],
+            'email' =>  ['label' => 'Email', 'rules' => 'trim|max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
         
@@ -76,9 +76,7 @@ class Guru extends BaseController
             'status' => esc($this->request->getVar('status')),
             'email' => esc($this->request->getVar('email')),
             'statusguru' => esc($this->request->getVar('statusguru')),
-            'gambar' => $nama_gambar,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];        
 
         $this->m_guru->tambah_guru($data);
@@ -87,11 +85,11 @@ class Guru extends BaseController
             return redirect()->to(base_url('backend/guru'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_guru($id)
+    function edit_guru($id)
     {   
         $cek = $this->m_guru->cek_guru($id);
         if($cek)
@@ -105,7 +103,7 @@ class Guru extends BaseController
         }
     }
 
-    public function update_guru($id)
+    function update_guru($id)
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama Lengkap', 'rules' => 'required|max_length[100]'],
@@ -115,7 +113,7 @@ class Guru extends BaseController
             'statuspeg' =>  ['label' => 'Status Pegawai', 'rules' => 'required|max_length[5]'],
             'status' =>  ['label' => 'Status', 'rules' => 'required|max_length[10]'],
             'statusguru' =>  ['label' => 'Status', 'rules' => 'required|max_length[12]'],
-            'email' =>  ['label' => 'Email', 'rules' => 'trim|valid_email|max_length[100]'],
+            'email' =>  ['label' => 'Email', 'rules' => 'trim|max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
                     
@@ -170,9 +168,7 @@ class Guru extends BaseController
             'status' => esc($this->request->getVar('status')),
             'email' => esc($this->request->getVar('email')),
             'statusguru' => esc($this->request->getVar('statusguru')),
-            'gambar' => $nama_gambar,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];        
         
         $this->m_guru->edit_guru($data, $id);
@@ -181,11 +177,11 @@ class Guru extends BaseController
             return redirect()->to(base_url('backend/guru'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_guru($id)
+    function hapus_guru($id)
     {   
         $cek = $this->m_guru->cek_guru($id);
         if($cek)

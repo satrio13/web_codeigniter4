@@ -13,7 +13,7 @@ class Dashboard extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Hasil Penelusuran Alumni';
         $data['data'] = $this->m_isialumni->list_isialumni();

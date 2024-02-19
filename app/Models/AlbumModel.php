@@ -14,17 +14,17 @@ class AlbumModel extends Model
     protected $protectFields    = false;
     protected $allowedFields    = [];
 
-    public function list_album($page)
+    function list_album($page)
     {
         return $this->where('is_active', 1)->orderBy('updated_at','desc')->paginate($page);
     }
 
-    public function cek_album($slug)
+    function cek_album($slug)
     {
         return $this->select('slug')->getWhere(['slug' => $slug, 'is_active' => 1])->getRow();
     }
 
-    public function get_album($slug)
+    function get_album($slug)
     {
         return $this->getWhere(['slug' => $slug, 'is_active' => 1])->getRow();
     }

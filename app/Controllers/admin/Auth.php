@@ -12,7 +12,7 @@ class Auth extends BaseController
         $this->m_auth = new AuthModel();
     }
 
-    public function login()
+    function login()
     {
         if(session('id_user'))
         {
@@ -22,7 +22,7 @@ class Auth extends BaseController
         return view('admin/auth/login');
     }
 
-    public function proses_login()
+    function proses_login()
     {
         $post = $this->request->getPost();
         $user = $this->m_auth->cek_user($post['username']);
@@ -44,19 +44,19 @@ class Auth extends BaseController
                     return redirect()->to(base_url('backend/dashboard'));  
                 }else
                 {
-                    return redirect()->back()->with('error','Password Salah!');  
+                    return redirect()->back()->withInput()->with('error','Password Salah!');  
                 }
             }else
             {
-                return redirect()->back()->with('error','Akun tidak aktif!');
+                return redirect()->back()->withInput()->with('error','Akun tidak aktif!');
             }
         }else
         {
-            return redirect()->back()->with('error','Username tidak terdaftar!');
+            return redirect()->back()->withInput()->with('error','Username tidak terdaftar!');
         }
     }
 
-    public function logout()
+    function logout()
     {
         session()->destroy();
         return redirect()->to(base_url('auth/login'));  

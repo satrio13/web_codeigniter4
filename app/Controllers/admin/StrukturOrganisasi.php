@@ -13,21 +13,21 @@ class StrukturOrganisasi extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Struktur Organisasi';
         $data['data'] = $this->m_struktur_organisasi->get_struktur_organisasi();
         return view('admin/struktur_organisasi/index', $data);
     }
 
-    public function edit_struktur_organisasi()
+    function edit_struktur_organisasi()
     {
         $data['title'] = 'Edit Struktur Organisasi';
         $data['data'] = $this->m_struktur_organisasi->get_struktur_organisasi();
         return view('admin/struktur_organisasi/form_struktur', $data);
     }
 
-    public function update_struktur_organisasi()
+    function update_struktur_organisasi()
     {
         $get = $this->m_struktur_organisasi->get_struktur_organisasi();
         $gambar = $this->request->getFile('struktur');
@@ -52,7 +52,7 @@ class StrukturOrganisasi extends BaseController
             }
         }else
         {
-            return redirect()->back()->with('error', 'Anda belum memilih file yang akan diupload!');
+            return redirect()->back()->withInput()->with('error', 'Anda belum memilih file yang akan diupload!');
         }
     
         $data = [

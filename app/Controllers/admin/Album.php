@@ -13,20 +13,20 @@ class Album extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Album';
         $data['data'] = $this->m_album->list_album();
         return view('admin/album/index', $data);
     }
 
-    public function tambah_album()
+    function tambah_album()
     {
         $data['title'] = 'Tambah Album';
         return view('admin/album/form_tambah', $data);
     }
 
-    public function simpan_album()
+    function simpan_album()
     {
         $this->rules->setRules([
             'album' => ['label' => 'Nama Album', 'rules' => 'required|max_length[50]'],
@@ -41,9 +41,7 @@ class Album extends BaseController
         $data = [
             'album' => esc($this->request->getVar('album')),
             'is_active' => esc($this->request->getVar('is_active')),
-            'slug' => slug(esc($this->request->getVar('album'))),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('album')))
         ];
 
         $this->m_album->tambah_album($data);
@@ -52,11 +50,11 @@ class Album extends BaseController
             return redirect()->to(base_url('backend/album'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_album($id)
+    function edit_album($id)
     {   
         $cek = $this->m_album->cek_album($id);
         if($cek)
@@ -70,7 +68,7 @@ class Album extends BaseController
         }
     }
 
-    public function update_album($id)
+    function update_album($id)
     {
         $this->rules->setRules([
             'album' => ['label' => 'Nama Album', 'rules' => 'required|max_length[50]'],
@@ -85,8 +83,7 @@ class Album extends BaseController
         $data = [
             'album' => esc($this->request->getVar('album')),
             'is_active' => esc($this->request->getVar('is_active')),
-            'slug' => slug(esc($this->request->getVar('album'))),
-            'updated_at' => date('Y-m-d H:i:s')
+            'slug' => slug(esc($this->request->getVar('album')))
         ];
 
         $this->m_album->edit_album($data, $id);
@@ -95,11 +92,11 @@ class Album extends BaseController
             return redirect()->to(base_url('backend/album'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_album($id)
+    function hapus_album($id)
     {
         $cek = $this->m_album->cek_album($id);
         if($cek)

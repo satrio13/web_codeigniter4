@@ -12,7 +12,7 @@ class Prestasi extends BaseController
         $this->m_prestasi = new PrestasiModel();
     }
 
-    public function prestasi_siswa()
+    function prestasi_siswa()
     {
 		$data['titleweb'] = 'Prestasi Siswa - '.title();
 		$data['title'] = 'Prestasi Siswa';
@@ -20,7 +20,7 @@ class Prestasi extends BaseController
         return view('prestasi/prestasi_siswa', $data);
     }
 
-    public function prestasi_madrasah()
+    function prestasi_madrasah()
     {
         if(jenjang() == 3 OR jenjang() == 4)
         {
@@ -34,7 +34,7 @@ class Prestasi extends BaseController
         }
     }
 
-    public function prestasi_sekolah()
+    function prestasi_sekolah()
     {
         if(jenjang() == 1 OR jenjang() == 2)
         {
@@ -48,7 +48,7 @@ class Prestasi extends BaseController
         }
     }
 
-    public function prestasi_guru()
+    function prestasi_guru()
     {
 		$data['titleweb'] = 'Prestasi Guru - '.title();
 		$data['title'] = 'Prestasi Guru';

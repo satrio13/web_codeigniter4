@@ -14,7 +14,7 @@ class Agenda extends BaseController
         $this->m_home = new HomeModel();
     }
 
-    public function index()
+    function index()
     {
 		$data['titleweb'] = 'Agenda - '.title();
 		$data['title'] = 'Agenda';
@@ -32,7 +32,7 @@ class Agenda extends BaseController
         return view('agenda/index', $data);
     }
 
-    public function detail($slug)
+    function detail($slug)
     {
         $cek = $this->m_agenda->cek_agenda($slug);
         if($cek)

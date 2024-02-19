@@ -13,20 +13,20 @@ class Kurikulum extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Kurikulum';
         $data['data'] = $this->m_kurikulum->list_kurikulum();
         return view('admin/kurikulum/index', $data);
     }
 
-    public function tambah_kurikulum()
+    function tambah_kurikulum()
     {
         $data['title'] = 'Tambah Kurikulum';
         return view('admin/kurikulum/form_tambah', $data);
     }
 
-    public function simpan_kurikulum()
+    function simpan_kurikulum()
     {
         $this->rules->setRules([
             'mapel' => ['label' => 'Mata Pelajaran', 'rules' => 'required|max_length[50]'],
@@ -46,9 +46,7 @@ class Kurikulum extends BaseController
             'alokasi' => esc($this->request->getVar('alokasi')),
             'kelompok' => esc($this->request->getVar('kelompok')),
             'no_urut' => esc($this->request->getVar('no_urut')),
-            'is_active' => esc($this->request->getVar('is_active')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'is_active' => esc($this->request->getVar('is_active'))
         ];
 
         $this->m_kurikulum->tambah_kurikulum($data);
@@ -57,11 +55,11 @@ class Kurikulum extends BaseController
             return redirect()->to(base_url('backend/kurikulum'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_kurikulum($id)
+    function edit_kurikulum($id)
     {   
         $cek = $this->m_kurikulum->cek_kurikulum($id);
         if($cek)
@@ -75,7 +73,7 @@ class Kurikulum extends BaseController
         }
     }
 
-    public function update_kurikulum($id)
+    function update_kurikulum($id)
     {
         $this->rules->setRules([
             'mapel' => ['label' => 'Mata Pelajaran', 'rules' => 'required|max_length[50]'],
@@ -95,9 +93,7 @@ class Kurikulum extends BaseController
             'alokasi' => esc($this->request->getVar('alokasi')),
             'kelompok' => esc($this->request->getVar('kelompok')),
             'no_urut' => esc($this->request->getVar('no_urut')),
-            'is_active' => esc($this->request->getVar('is_active')),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'is_active' => esc($this->request->getVar('is_active'))
         ];
 
         $this->m_kurikulum->edit_kurikulum($data, $id);
@@ -106,11 +102,11 @@ class Kurikulum extends BaseController
             return redirect()->to(base_url('backend/kurikulum'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_kurikulum($id)
+    function hapus_kurikulum($id)
     {
         $cek = $this->m_kurikulum->cek_kurikulum($id);
         if($cek)

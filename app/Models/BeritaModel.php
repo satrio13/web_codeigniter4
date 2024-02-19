@@ -14,27 +14,27 @@ class BeritaModel extends Model
     protected $protectFields    = false;
     protected $allowedFields    = [];
 
-    public function list_berita($page)
+    function list_berita($page)
     {
         return $this->where('is_active', 1)->orderBy('id','desc')->paginate($page);
     }
 
-    public function list_berita_cari($page, $keyword)
+    function list_berita_cari($page, $keyword)
     {
         return $this->where('is_active', 1)->like('nama', $keyword)->orderBy('id','desc')->paginate($page);
     }
 
-    public function cek_berita($slug)
+    function cek_berita($slug)
     {
         return $this->select('slug,dibaca')->getWhere(['slug' => $slug])->getRow();
     }
 
-    public function detail_berita($slug)
+    function detail_berita($slug)
     {
         return $this->getWhere(['slug' => $slug])->getRow();
     }
 
-    public function update_dibaca($data, $slug)
+    function update_dibaca($data, $slug)
     {
         $this->set($data)->where(['slug' => $slug])->update();
     }

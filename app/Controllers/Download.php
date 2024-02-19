@@ -12,7 +12,7 @@ class Download extends BaseController
         $this->m_download = new DownloadModel();
     }
 
-    public function index()
+    function index()
     {
         $data['titleweb'] = 'Download - '.title();
 		$data['title'] = 'Download';
@@ -20,7 +20,7 @@ class Download extends BaseController
         return view('download/index', $data);
     }
 
-    public function hits($file)
+    function hits($file)
     {
         $cek = $this->m_download->cek_download($file);
         if($cek)

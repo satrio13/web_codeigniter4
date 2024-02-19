@@ -13,20 +13,20 @@ class Karyawan extends BaseController
         date_default_timezone_set('Asia/Jakarta');
     }
 
-    public function index()
+    function index()
     {
         $data['title'] = 'Karyawan';
         $data['data'] = $this->m_karyawan->list_karyawan();
         return view('admin/karyawan/index', $data);
     }
 
-    public function tambah_karyawan()
+    function tambah_karyawan()
     {
         $data['title'] = 'Tambah Karyawan';
         return view('admin/karyawan/form_tambah', $data);
     }
 
-    public function simpan_karyawan()
+    function simpan_karyawan()
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama Lengkap', 'rules' => 'required|max_length[100]'],
@@ -35,7 +35,7 @@ class Karyawan extends BaseController
             'jk' =>  ['label' => 'Jenis Kelamin', 'rules' => 'required'],
             'statuspeg' =>  ['label' => 'Status Pegawai', 'rules' => 'required|max_length[5]'],
             'status' =>  ['label' => 'Status', 'rules' => 'required|max_length[10]'],
-            'email' =>  ['label' => 'Email', 'rules' => 'trim|valid_email|max_length[100]'],
+            'email' =>  ['label' => 'Email', 'rules' => 'trim|max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
         
@@ -75,9 +75,7 @@ class Karyawan extends BaseController
             'status' => esc($this->request->getVar('status')),
             'email' => esc($this->request->getVar('email')),
             'tugas' => esc($this->request->getVar('tugas')),
-            'gambar' => $nama_gambar,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];        
 
         $this->m_karyawan->tambah_karyawan($data);
@@ -86,11 +84,11 @@ class Karyawan extends BaseController
             return redirect()->to(base_url('backend/karyawan'))->with('success', 'Data Berhasil Ditambahkan');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Ditambahkan, silahkan coba lagi!');
         }
     }
 
-    public function edit_karyawan($id)
+    function edit_karyawan($id)
     {   
         $cek = $this->m_karyawan->cek_karyawan($id);
         if($cek)
@@ -104,7 +102,7 @@ class Karyawan extends BaseController
         }
     }
 
-    public function update_karyawan($id)
+    function update_karyawan($id)
     {
         $this->rules->setRules([
             'nama' => ['label' => 'Nama Lengkap', 'rules' => 'required|max_length[100]'],
@@ -113,7 +111,7 @@ class Karyawan extends BaseController
             'jk' =>  ['label' => 'Jenis Kelamin', 'rules' => 'required'],
             'statuspeg' =>  ['label' => 'Status Pegawai', 'rules' => 'required|max_length[5]'],
             'status' =>  ['label' => 'Status', 'rules' => 'required|max_length[10]'],
-            'email' =>  ['label' => 'Email', 'rules' => 'trim|valid_email|max_length[100]'],
+            'email' =>  ['label' => 'Email', 'rules' => 'trim|max_length[100]'],
             //'gambar' => 'max_size[gambar,1024]|is_image[gambar]|mime_in[gambar,img/jpg,image/jpeg,image/png]',
         ]);
                     
@@ -168,9 +166,7 @@ class Karyawan extends BaseController
             'status' => esc($this->request->getVar('status')),
             'email' => esc($this->request->getVar('email')),
             'tugas' => esc($this->request->getVar('tugas')),
-            'gambar' => $nama_gambar,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'gambar' => $nama_gambar
         ];        
         
         $this->m_karyawan->edit_karyawan($data, $id);
@@ -179,11 +175,11 @@ class Karyawan extends BaseController
             return redirect()->to(base_url('backend/karyawan'))->with('success', 'Data Berhasil Diupdate');
         }else
         {
-            return redirect()->back()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
+            return redirect()->back()->withInput()->with('error', 'Data Gagal Diupdate, silahkan coba lagi!');
         }
     }
 
-    public function hapus_karyawan($id)
+    function hapus_karyawan($id)
     {   
         $cek = $this->m_karyawan->cek_karyawan($id);
         if($cek)
@@ -207,7 +203,7 @@ class Karyawan extends BaseController
         }
     }
 
-    public function lihat_karyawan($id)
+    function lihat_karyawan($id)
     {   
         $cek = $this->m_karyawan->cek_karyawan($id);
         if($cek)
