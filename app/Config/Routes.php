@@ -10,7 +10,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('auth/login', 'admin\Auth::login'); // start auth
 $routes->post('auth/proses-login', 'admin\Auth::proses_login');
 $routes->get('auth/logout', 'admin\Auth::logout'); // end auth
-$routes->get('backend/dashboard', 'admin\Dashboard::index'); // dashboard
+$routes->get('backend', 'admin\Backend::index'); // dashboard
+$routes->get('backend/dashboard', 'admin\Dashboard::index'); 
 $routes->get('backend/pengaduan', 'admin\Pengaduan::index'); // start pengaduan
 $routes->get('backend/detail-pengaduan/(:num)', 'admin\Pengaduan::detail_pengaduan/$1');
 $routes->get('backend/lihat-pengaduan/(:num)', 'admin\Pengaduan::lihat_pengaduan/$1');
