@@ -43,13 +43,13 @@
                     <?php echo form_open('auth/proses-login'); ?>
                         <?= csrf_field(); ?>
                         <div class="input-group mb-3">
-                            <input type="text" name="username" maxlength="30" minlength="5" class="form-control sepasi" placeholder="Username" autocomplete="off" autofocus value="<?= old('username'); ?>">
+                            <input type="text" name="username" maxlength="30" minlength="5" class="form-control sepasi" placeholder="Username" autocomplete="off" autofocus value="<?= old('username'); ?>" required>
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-user"></span></div>
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" name="password" maxlength="30" minlength="5" class="form-control sepasi" placeholder="Password">
+                            <input type="password" name="password" maxlength="30" minlength="5" class="form-control sepasi" placeholder="Password" required>
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-lock"></span></div>
                             </div>
