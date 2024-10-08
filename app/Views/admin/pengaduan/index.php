@@ -141,6 +141,36 @@
             handle_confirm_delete();
         });
 
+        function cek_session(callback)
+        {
+            $.ajax({
+                url: base_url + "auth/cek-session", 
+                type: "GET",
+                dataType: "JSON",
+                success: function(data)
+                {   
+                    if(!data.session_active)
+                    {
+                        swal({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Sesi anda telah habis, silahkan login kembali',
+                            timer: 5000
+                        }).then(() => {
+                            window.location.reload(); 
+                        });
+                    }else
+                    {
+                        callback();
+                    }
+                },
+                error: function()
+                {
+                   alert_gagal('Error checking session. Please check your internet connection!');
+                }
+            });
+        }
+
         function handle_datatable()
         {
             $("#datatable").DataTable();
@@ -155,43 +185,46 @@
         
         function detail(id)
         {
-            $('#modal_form').modal('show'); 
-            $('#nama, #status, #pengaduan').html('');           
+            cek_session(function()
+            { 
+                $('#modal_form').modal('show'); 
+                $('#nama, #status, #pengaduan').html('');           
 
-            $.ajax({
-                url : base_url + "backend/lihat-pengaduan/"+id,
-                type: "GET",
-                dataType: "JSON",
-                beforeSend: function()
-                {
-                    $("#load").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
-                },
-                success: function(data)
-                {
-                    var status;
-                    if(data.status == '1')
+                $.ajax({
+                    url : base_url + "backend/lihat-pengaduan/"+id,
+                    type: "GET",
+                    dataType: "JSON",
+                    beforeSend: function()
                     {
-                        status = 'Peserta Didik';
-                    }else if(data.status == '2')
+                        $("#load").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
+                    },
+                    success: function(data)
                     {
-                        status = 'Wali Murid';
-                    }else if(data.status == '3')
+                        var status;
+                        if(data.status == '1')
+                        {
+                            status = 'Peserta Didik';
+                        }else if(data.status == '2')
+                        {
+                            status = 'Wali Murid';
+                        }else if(data.status == '3')
+                        {
+                            status = 'Masyarakat';
+                        }else
+                        {
+                            status = '';
+                        }
+
+                        $("#load").html('');
+                        $('#nama').html(': ' + data.nama);               
+                        $('#status').html(': ' + status);    
+                        $('#pengaduan').html(': ' + data.isi);    
+                    },
+                    error: function (request)
                     {
-                        status = 'Masyarakat';
-                    }else
-                    {
-                        status = '';
+                        alert_gagal('An error occurred during your request: '+  request.status + ' ' + request.statusText + 'Please Try Again!!');
                     }
-
-                    $("#load").html('');
-                    $('#nama').html(': ' + data.nama);               
-                    $('#status').html(': ' + status);    
-                    $('#pengaduan').html(': ' + data.isi);    
-                },
-                error: function (request)
-                {
-                    alert_gagal('An error occurred during your request: '+  request.status + ' ' + request.statusText + 'Please Try Again!!');
-                }
+                });
             });
         }
     </script>
