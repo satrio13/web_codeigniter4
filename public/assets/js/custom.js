@@ -21,7 +21,8 @@ function handle_owl_carousel()
     
 function handle_image_link()
 {
-    if($(".image-link").length){
+    if($(".image-link").length)
+    {
         $(".image-link").magnificPopup({
             type: "image",
             gallery: {
