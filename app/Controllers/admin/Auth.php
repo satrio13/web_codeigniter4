@@ -62,4 +62,15 @@ class Auth extends BaseController
         return redirect()->to(base_url('auth/login'));  
     }
 
+    function cek_session()
+    {
+        if(!session('id_user'))
+        {
+            echo json_encode(['session_active' => false]);   
+        }else
+        {
+            echo json_encode(['session_active' => true]);
+        }     
+    }
+
 }
