@@ -25,16 +25,12 @@ class Download extends BaseController
         $cek = $this->m_download->cek_download($file);
         if($cek)
         {
-            $upd = [
-                'hits' => $cek->hits + 1
-            ];
-
+            $upd = ['hits' => $cek->hits + 1];
             $this->m_download->update_dibaca($upd, $file);
-
             $file = "uploads/file/$cek->file";
-            if (!file_exists($file))
+            if(!file_exists($file))
             {
-                die('File not found');
+                show_404();
             }else
             {
                 // Set the appropriate headers
