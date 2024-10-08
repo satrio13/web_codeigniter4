@@ -40,11 +40,7 @@ class Berita extends BaseController
             $get = $this->m_berita->detail_berita($slug);
             $data['titleweb'] = $get->nama.' - '.title();
 			$data['title'] = $get->nama;
-
-            $upd = [
-                'dibaca' => $cek->dibaca + 1
-            ];
-            
+            $upd = ['dibaca' => $cek->dibaca + 1];
             $this->m_berita->update_dibaca($upd, $slug);
             $data['data'] = $get;
             $data['berita_populer'] = $this->m_home->berita_populer($slug);
