@@ -108,6 +108,13 @@ function jenjang()
    return $q->jenjang;
 }
 
+function tahun($id_tahun)
+{
+   $db = \Config\Database::connect();
+   $q = $db->table('tb_tahun')->select('tahun')->getWhere(['id_tahun' => $id_tahun])->getRow();
+   return $q->tahun;
+}
+
 function nama_user($id_user)
 {
    $db = \Config\Database::connect();
