@@ -68,7 +68,7 @@
                                                 <td>'.$r->nama_file.'</td>
                                                 <td><a href="'.base_url("uploads/file/$r->file").'" target="_blank">'.$r->file.'</a></td>
                                                 <td>'.date('d-m-Y', strtotime($r->created_at)).'</td>
-                                                <td>'.$r->hits.'</td>
+                                                <td class="text-center">'.$r->hits.'</td>
                                                 <td>'.$r->nama.'</td>
                                                 <td class="text-center">'.$status.'</td>
                                                 <td class="text-center" nowrap>
