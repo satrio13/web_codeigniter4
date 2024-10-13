@@ -61,7 +61,8 @@
                                             $img = '<a href="'.base_url("uploads/img/banner/$r->gambar").'" target="_blank">
                                                         <img src="'.base_url("uploads/img/banner/$r->gambar").'" class="img img-fluid" width="100px">
                                                     </a>'; 
-                                        }else{
+                                        }else
+                                        {
                                             $img = '';
                                         }
                             
