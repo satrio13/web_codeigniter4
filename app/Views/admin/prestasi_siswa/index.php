@@ -67,53 +67,12 @@
                                     <?php
                                     $no = 1;
                                     foreach($data as $r):
-                                        if($r->jenis == '1')
-                                        {
-                                            $jenis = 'Akademik';
-                                        }else
-                                        {
-                                            $jenis = 'Non Akademik';
-                                        }
-
-                                        if($r->tingkat == '1')
-                                        {
-                                            $kab = '<i class="fa fa-check"></i>';
-                                        }else
-                                        {
-                                            $kab = '';
-                                        }
-
-                                        if($r->tingkat == '2')
-                                        {
-                                            $kar = '<i class="fa fa-check"></i>';
-                                        }else
-                                        {
-                                            $kar = '';
-                                        }
-
-                                        if($r->tingkat == '3')
-                                        {
-                                            $prov = '<i class="fa fa-check"></i>';
-                                        }else
-                                        {
-                                            $prov = '';
-                                        }
-
-                                        if($r->tingkat == '4')
-                                        {
-                                            $nas = '<i class="fa fa-check"></i>';
-                                        }else
-                                        {
-                                            $nas = '';
-                                        }
-
-                                        if($r->tingkat == '5')
-                                        {
-                                            $int = '<i class="fa fa-check"></i>';
-                                        }else
-                                        {
-                                            $int = '';
-                                        }
+                                        $jenis = ($r->jenis == '1') ? 'Akademik' : 'Non Akademik';
+                                        $kab = ($r->tingkat == '1') ? '<i class="fa fa-check"></i>' : '';
+                                        $kar = ($r->tingkat == '2') ? '<i class="fa fa-check"></i>' : '';
+                                        $prov = ($r->tingkat == '3') ? '<i class="fa fa-check"></i>' : '';
+                                        $nas = ($r->tingkat == '4') ? '<i class="fa fa-check"></i>' : '';
+                                        $int = ($r->tingkat == '5') ? '<i class="fa fa-check"></i>' : '';
 
                                         $target = "uploads/img/prestasi/siswa/$r->gambar";
                                         if($r->gambar != '' AND file_exists($target))
@@ -134,11 +93,11 @@
                                                 <td>Juara '.$r->prestasi.'</td>
                                                 <td>'.$r->nama_siswa.'</td>
                                                 <td>'.$r->kelas.'</td>
-                                                <td>'.$kab.'</td>
-                                                <td>'.$kar.'</td>
-                                                <td>'.$prov.'</td>
-                                                <td>'.$nas.'</td>
-                                                <td>'.$int.'</td>
+                                                <td class="text-center">'.$kab.'</td>
+                                                <td class="text-center">'.$kar.'</td>
+                                                <td class="text-center">'.$prov.'</td>
+                                                <td class="text-center">'.$nas.'</td>
+                                                <td class="text-center">'.$int.'</td>
                                                 <td>'.$r->keterangan.'</td>
                                                 <td class="text-center">'.$img.'</td>
                                                 <td class="text-center">
