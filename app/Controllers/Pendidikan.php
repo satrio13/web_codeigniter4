@@ -46,6 +46,7 @@ class Pendidikan extends BaseController
         $data['title'] = "Rekap Ujian $jenis";
         $data['tahun'] = $this->m_tahun->list_tahun();
         $data['submit'] = $this->request->getVar('submit');
+        $data['id_tahun'] = $this->request->getVar('id_tahun');
         $data['data'] = $this->m_pendidikan->cari_rekap_us($this->request->getVar('id_tahun'));
         return view('pendidikan/rekap_us', $data);
     }
