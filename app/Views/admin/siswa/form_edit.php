@@ -55,13 +55,13 @@ $id_tahun = old('id_tahun') ?? $data->id_tahun;
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"><?php if($profil->jenjang == 1 OR $profil->jenjang == 3){ echo'KELAS VII'; }else{ echo'KELAS X'; } ?> <span class="text-danger">*</span></label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="jml1pa" min="0" value="<?= old('jml1pa', $data->jml1pa); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRA" onkeypress="return hanyaAngka(event)">
+                                        <input type="number" name="jml1pa" min="0" value="<?= old('jml1pa', $data->jml1pa); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRA">
                                         <small class="text-danger">
                                             <?= (session()->has('validation')) ? session('validation')->getError('jml1pa') : '' ?>
                                         </small>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="number" name="jml1pi" min="0" value="<?= old('jml1pi', $data->jml1pi); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRI" onkeypress="return hanyaAngka(event)">
+                                        <input type="number" name="jml1pi" min="0" value="<?= old('jml1pi', $data->jml1pi); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRI">
                                         <small class="text-danger">
                                             <?= (session()->has('validation')) ? session('validation')->getError('jml1pi') : '' ?>
                                         </small>
@@ -70,13 +70,13 @@ $id_tahun = old('id_tahun') ?? $data->id_tahun;
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"><?php if($profil->jenjang == 1 OR $profil->jenjang == 3){ echo'KELAS VIII'; }else{ echo'KELAS XI'; } ?> <span class="text-danger">*</span></label>
                                     <div class="col-sm-3">
-                                        <input type="number" name="jml2pa" min="0" value="<?= old('jml2pa', $data->jml2pa); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRA" onkeypress="return hanyaAngka(event)">
+                                        <input type="number" name="jml2pa" min="0" value="<?= old('jml2pa', $data->jml2pa); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRA">
                                         <small class="text-danger">
                                             <?= (session()->has('validation')) ? session('validation')->getError('jml2pa') : '' ?>
                                         </small>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="number" name="jml2pi" min="0" value="<?= old('jml2pi', $data->jml2pi); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRI" onkeypress="return hanyaAngka(event)">
+                                        <input type="number" name="jml2pi" min="0" value="<?= old('jml2pi', $data->jml2pi); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRI">
                                         <small class="text-danger">
                                             <?= (session()->has('validation')) ? session('validation')->getError('jml2pi') : '' ?>
                                         </small>
@@ -85,13 +85,13 @@ $id_tahun = old('id_tahun') ?? $data->id_tahun;
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label"><?php if($profil->jenjang == 1 OR $profil->jenjang == 3){ echo'KELAS IX'; }else{ echo'KELAS XII'; } ?> <span class="text-danger">*</span></label>
                                     <div class="col-sm-3">
-                                        <input type="number" name="jml3pa" min="0" value="<?= old('jml3pa', $data->jml3pa); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRA" onkeypress="return hanyaAngka(event)">
+                                        <input type="number" name="jml3pa" min="0" value="<?= old('jml3pa', $data->jml3pa); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRA">
                                         <small class="text-danger">
                                             <?= (session()->has('validation')) ? session('validation')->getError('jml3pa') : '' ?>
                                         </small>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="number" name="jml3pi" min="0" value="<?= old('jml3pi', $data->jml3pi); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRI" onkeypress="return hanyaAngka(event)">
+                                        <input type="number" name="jml3pi" min="0" value="<?= old('jml3pi', $data->jml3pi); ?>" class="form-control required" placeholder="JUMLAH SISWA PUTRI">
                                         <small class="text-danger">
                                             <?= (session()->has('validation')) ? session('validation')->getError('jml3pi') : '' ?>
                                         </small>
@@ -127,13 +127,6 @@ $id_tahun = old('id_tahun') ?? $data->id_tahun;
         function handle_validate()
         {
             $("#form").validate();
-        }
-
-        function hanyaAngka(evt)
-        {
-            var charCode = evt.which ? evt.which : event.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
-            return true;
         }
     </script>
 <?= $this->endSection(); ?>
