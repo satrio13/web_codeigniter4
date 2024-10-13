@@ -42,7 +42,16 @@
                 </div>
             <?php echo form_close(); ?>
             <br>
-            <?php if(isset($submit)){ ?>
+            <?php 
+            if(isset($submit))
+            {    
+                if(jenjang() == 1 OR jenjang() == 2)
+                {
+                    echo'<h5 class="text-center">REKAP UJIAN SEKOLAH TAHUN PELAJARAN '.tahun($id_tahun).'</h5>';
+                }elseif(jenjang() == 3 OR jenjang() == 4)
+                {
+                    echo'<h5 class="text-center">REKAP UJIAN MADRASAH TAHUN PELAJARAN '.tahun($id_tahun).'</h5>';
+                } ?>  
                 <div class="table table-responsive">
                     <table class="table table-bordered table-striped table-sm">
                         <thead class="bg-theme text-white text-center">
