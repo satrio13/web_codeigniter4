@@ -41,7 +41,7 @@
                                         <?php if(empty($data->logo_admin)){ ?>
                                             <img class='img-responsive' id='preview_gambar' width='150px'>
                                         <?php }else{ ?>
-                                            Logo Sekarang: <img class='img-responsive mb-2' id='preview_gambar' width='150px' src="<?= base_url(); ?>uploads/img/logo/<?= $data->logo_admin; ?>">
+                                            <img class='img-responsive mb-2' id='preview_gambar' width='150px' src="<?= base_url(); ?>uploads/img/logo/<?= $data->logo_admin; ?>">
                                         <?php } ?>
                                         <input type='file' name='logo_admin' id="file-upload" accept='image/png, image/jpeg' class='form-control' onchange='readURL(this);' required>
                                         <p style="color: red"> *) format file JPG/PNG ukuran maksimal 1 MB</p>
