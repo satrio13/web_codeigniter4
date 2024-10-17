@@ -39,7 +39,7 @@
                                 <label class="col-sm-2 col-form-label">FILE <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
                                     <?php if(!empty($data->file)){ ?>
-                                        File sekarang : <a href="<?= base_url("uploads/file/$data->file"); ?>" target="_blank"><?= $data->file; ?>
+                                        File sekarang : <a href="<?= base_url("uploads/file/$data->file"); ?>" target="_blank"><?= $data->file; ?></a>
                                     <?php } ?>
                                     <input type="file" name="file" accept=".pdf" class="form-control" required>
                                     <p style="color: red"> *) format file PDF ukuran maksimal 5 MB</p>
