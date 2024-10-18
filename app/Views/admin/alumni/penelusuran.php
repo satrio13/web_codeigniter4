@@ -281,9 +281,6 @@
         {
             cek_session(function()
             { 
-                $('#modal_form').modal('show'); 
-                $("#img, #nama, #th_lulus, #sma, #pt, #instansi, #alamatins, #hp, #email, #alamat, #kesan").html('');
-
                 $.ajax({
                     url : base_url + "backend/lihat-alumni/"+id,
                     type: "GET",
@@ -317,6 +314,7 @@
                         $("#email").html(': ' + data.email);
                         $("#alamat").html(': ' + data.alamat);
                         $("#kesan").html(': ' + data.kesan);
+                        $('#modal_form').modal('show'); 
                     },
                     error: function (request)
                     {
@@ -330,8 +328,6 @@
         {
             cek_session(function()
             { 
-                $('#modal_status').modal('show'); 
-
                 $.ajax({
                     url : base_url + "backend/status/"+id,
                     type: "GET",
@@ -345,6 +341,7 @@
                         $("#load_status").html('');
                         $('#id').val(data.id);
                         $('#status').val(data.status);
+                        $('#modal_status').modal('show'); 
                     },
                     error: function (request)
                     {
