@@ -269,9 +269,6 @@
         {
             cek_session(function()
             { 
-                $('#modal_form').modal('show'); 
-                $("#img, #nama, #nip, #duk, #niplama, #nuptk, #nokarpeg, #tmp_lahir, #tgl_lahir, #statuspeg, #golruang, #tmt_cpns, #tmt_pns, #jk,#agama, #alamat, #tingkat_pt, #prodi, #th_lulus, #status, #statusguru, #email").html('');
-
                 $.ajax({
                     url : base_url + "backend/lihat-guru/"+id,
                     type: "GET",
@@ -379,6 +376,7 @@
                         $("#status").html(': ' + data.status);
                         $("#statusguru").html(': ' + data.statusguru);
                         $("#email").html(': ' + data.email);
+                        $('#modal_form').modal('show'); 
                     },
                     error: function (request)
                     {
