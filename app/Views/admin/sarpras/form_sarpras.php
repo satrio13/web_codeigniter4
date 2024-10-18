@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="<?= base_url('backend'); ?>">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="<?= base_url('backend/struktur-organisasi'); ?>">Struktur Organisasi</a></li>
+                            <li class="breadcrumb-item"><a href="<?= base_url('backend/sarpras'); ?>">Sarana & Prasarana</a></li>
                             <li class="breadcrumb-item active"><?= $title; ?></li>
                         </ol>
                     </div>
@@ -31,27 +31,21 @@
                         <div class="card-header">
                             <h3 class="card-title">FORM <?= strtoupper($title); ?></h3>
                         </div>
-                        <?php echo form_open_multipart("backend/update-struktur-organisasi","id='form'"); ?>
+                        <?php echo form_open("backend/update-sarpras","id='form'"); ?>
                         <?= csrf_field(); ?>
                         <input type="hidden" name="_method" value="PUT">
-                            <div class="card-body">
-                                <div class="form-group row">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">GAMBAR <span class="text-danger">*</span></label>
-                                    <div class="col-sm-5">
-                                        <?php if(empty($data->isi)){ ?>
-                                            <img class='img-responsive' id='preview_gambar' width='150px'>
-                                        <?php }else{ ?>
-                                            <img class='img-responsive' id='preview_gambar' width='150px' src="<?= base_url(); ?>uploads/img/struktur/<?= $data->isi; ?>">
-                                        <?php } ?>
-                                        <input type='file' class='form-control' name='struktur' accept='image/png, image/jpeg' onchange='readURL(this);' required>
-                                        <p style="color: red"> *) format file JPG/PNG ukuran maksimal 1 MB</p>
-                                    </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">SARANA & PRASARANA</label>
+                                <div class="col-sm-8">
+                                    <textarea name="isi" class="textarea"><?= old('isi',$data->isi); ?></textarea>
                                 </div>
                             </div>
-                            <div class="card-footer">
-                                <button type="submit" name="submit" value="Submit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> SIMPAN</button>
-                                <a href="<?= base_url('backend/struktur-organisasi'); ?>" class="btn btn-danger btn-sm float-right"><i class="fa fa-arrow-left"></i> BATAL</a>
-                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" name="submit" value="Submit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> SIMPAN</button>
+                            <a href="<?= base_url('backend/sarpras'); ?>" class="btn btn-danger btn-sm float-right"><i class="fa fa-arrow-left"></i> BATAL</a>
+                        </div>
                         <?php echo form_close() ?>
                     </div>
                     <!-- /.card -->
@@ -65,20 +59,13 @@
 <?= $this->endSection(); ?>
 <?= $this->section('script'); ?>
     <script>
-        function readURL(input)
-        {
-            if(input.files && input.files[0])
-            {
-                var reader = new FileReader();
-                reader.onload = function (e)
-                {
-                    $("#preview_gambar").attr("src", e.target.result);
-                    //.width(300); // Menentukan lebar gambar preview (dalam pixel)
-                    //.height(200); // // Menentukan tinggi gambar preview (dalam pixel)
-                };
+        $(document).ready(function () {
+            handle_summernote();
+        });
 
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+        function handle_summernote()
+        {
+            $(".textarea").summernote();
+        } 
     </script>
 <?= $this->endSection(); ?>
