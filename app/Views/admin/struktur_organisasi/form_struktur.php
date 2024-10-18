@@ -64,5 +64,21 @@
     </div>
 <?= $this->endSection(); ?>
 <?= $this->section('script'); ?>
-    
+    <script>
+        function readURL(input)
+        {
+            if(input.files && input.files[0])
+            {
+                var reader = new FileReader();
+                reader.onload = function (e)
+                {
+                    $("#preview_gambar").attr("src", e.target.result);
+                    //.width(300); // Menentukan lebar gambar preview (dalam pixel)
+                    //.height(200); // // Menentukan tinggi gambar preview (dalam pixel)
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 <?= $this->endSection(); ?>
