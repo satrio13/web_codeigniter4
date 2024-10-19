@@ -164,6 +164,10 @@
                         <div class="col-md-10" id="statuspeg"></div>
                     </div>
                     <div class="row mt-2">
+                        <div class="col-md-2 text-bold">TUGAS</div>
+                        <div class="col-md-10" id="tugas"></div>
+                    </div>
+                    <div class="row mt-2">
                         <div class="col-md-2 text-bold">GOLONGAN RUANG</div>
                         <div class="col-md-10" id="golruang"></div>
                     </div>
@@ -278,7 +282,7 @@
                         var fileUrl = base_url +'uploads/img/karyawan/'+ data.gambar;
                         check_file_exists(fileUrl, function(exists)
                         {
-                            if(data.gambar != '')
+                            if(data.gambar !== '')
                             {
                                 $("#img").html('<img src="'+ base_url +'uploads/img/karyawan/'+ data.gambar +'" class="img img-fluid img-thumbnail" width="120px">');
                             }else
@@ -287,32 +291,9 @@
                             }
                         });
 
-                        var tgl_lahir;
-                        if(data.tgl_lahir != '0000-00-00')
-                        {
-                            tgl_lahir = tgl_indo(data.tgl_lahir);
-                        }else
-                        {
-                            tgl_lahir = '';
-                        }
-
-                        var tmt_cpns;
-                        if(data.tmt_cpns != '0000-00-00')
-                        {
-                            tmt_cpns = tgl_indo(data.tmt_cpns);
-                        }else
-                        {
-                            tmt_cpns = '';
-                        }
-
-                        var tmt_pns;
-                        if(data.tmt_pns != '0000-00-00')
-                        {
-                            tmt_pns = tgl_indo(data.tmt_pns);
-                        }else
-                        {
-                            tmt_pns = '';
-                        }
+                        var tgl_lahir = (data.tgl_lahir !== '0000-00-00' && data.tgl_lahir !== null) ? tgl_indo(data.tgl_lahir) : '';
+                        var tmt_cpns = (data.tmt_cpns !== '0000-00-00' && data.tmt_cpns !== null) ? tgl_indo(data.tmt_cpns) : '';
+                        var tmt_pns = (data.tmt_pns !== '0000-00-00' && data.tmt_pns !== null) ? tgl_indo(data.tmt_pns) : '';
 
                         var jk;
                         if(data.jk == 1)
@@ -360,6 +341,7 @@
                         $("#tmp_lahir").html(': ' + data.tmp_lahir);
                         $("#tgl_lahir").html(': ' + tgl_lahir);
                         $("#statuspeg").html(': ' + data.statuspeg);
+                        $("#tugas").html(': ' + data.tugas);
                         $("#golruang").html(': ' + data.golruang);
                         $("#tmt_cpns").html(': ' + tmt_cpns);
                         $("#tmt_pns").html(': ' + tmt_pns);
