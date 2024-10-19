@@ -282,7 +282,7 @@
                         var fileUrl = base_url +'uploads/img/guru/'+ data.gambar;
                         check_file_exists(fileUrl, function(exists)
                         {
-                            if(data.gambar != '')
+                            if(data.gambar !== '')
                             {
                                 $("#img").html('<img src="'+ base_url +'uploads/img/guru/'+ data.gambar +'" class="img img-fluid img-thumbnail" width="120px">');
                             }else
@@ -291,32 +291,9 @@
                             }
                         });
 
-                        var tgl_lahir;
-                        if(data.tgl_lahir != '0000-00-00')
-                        {
-                            tgl_lahir = tgl_indo(data.tgl_lahir);
-                        }else
-                        {
-                            tgl_lahir = '';
-                        }
-
-                        var tmt_cpns;
-                        if(data.tmt_cpns != '0000-00-00')
-                        {
-                            tmt_cpns = tgl_indo(data.tmt_cpns);
-                        }else
-                        {
-                            tmt_cpns = '';
-                        }
-
-                        var tmt_pns;
-                        if(data.tmt_pns != '0000-00-00')
-                        {
-                            tmt_pns = tgl_indo(data.tmt_pns);
-                        }else
-                        {
-                            tmt_pns = '';
-                        }
+                        var tgl_lahir = (data.tgl_lahir !== '0000-00-00' && data.tgl_lahir !== null) ? tgl_indo(data.tgl_lahir) : '';
+                        var tmt_cpns = (data.tmt_cpns !== '0000-00-00' && data.tmt_cpns !== null) ? tgl_indo(data.tmt_cpns) : '';
+                        var tmt_pns = (data.tmt_pns !== '0000-00-00' && data.tmt_pns !== null) ? tgl_indo(data.tmt_pns) : '';
 
                         var jk;
                         if(data.jk == 1)
