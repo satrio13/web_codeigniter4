@@ -56,9 +56,9 @@
                                             <td class="text-center"><?= $no++; ?></td>
                                             <td><?= $r->tahun; ?></td>
                                             <td><?= $r->mapel; ?></td>
-                                            <td><?= $r->tertinggi; ?></td>
-                                            <td><?= $r->terendah; ?></td>
-                                            <td><?= $r->rata; ?></td>
+                                            <td class="text-center"><?= $r->tertinggi; ?></td>
+                                            <td class="text-center"><?= $r->terendah; ?></td>
+                                            <td class="text-center"><?= $r->rata; ?></td>
                                             <td class="text-center" nowrap>
                                                 <a href="<?= base_url("backend/edit-rekap-us/$r->id_us"); ?>" class="btn btn-info btn-xs" title="EDIT DATA">EDIT</a>
                                                 <a href="javascript:void(0)" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#konfirmasi_hapus" data-href="<?= base_url("backend/hapus-rekap-us/$r->id_us"); ?>" title="HAPUS DATA">HAPUS</a>
