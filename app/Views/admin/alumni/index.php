@@ -54,9 +54,9 @@
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
                                             <td><?= $r->tahun; ?></td>
-                                            <td class="text-right"><?= $r->jml_l; ?></td>
-                                            <td class="text-right"><?= $r->jml_p; ?></td>
-                                            <td class="text-right"><?= $r->jml_l+$r->jml_p; ?></td>
+                                            <td class="text-center"><?= $r->jml_l; ?></td>
+                                            <td class="text-center"><?= $r->jml_p; ?></td>
+                                            <td class="text-center"><?= $r->jml_l+$r->jml_p; ?></td>
                                             <td class="text-center" nowrap>
                                                 <a href="<?= base_url("backend/edit-alumni/$r->id"); ?>" class="btn btn-info btn-xs" title="EDIT DATA">EDIT</a>
                                                 <a href="javascript:void(0)" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#konfirmasi_hapus" 
