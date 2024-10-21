@@ -47,7 +47,7 @@
                                             <th>ALAMAT</th>
                                             <th>KESAN</th>
                                             <th>GAMBAR</th>
-                                            <th>TGL POST</th>
+                                            <th>TGL POSTING</th>
                                             <th width="10%">AKSI</th>
                                         </tr>
                                     </thead>
@@ -192,6 +192,10 @@
                         <div class="col-md-2 text-bold">KESAN</div>
                         <div class="col-md-10" id="kesan"></div>
                     </div>
+                    <div class="row mt-2">
+                        <div class="col-md-2 text-bold">TGL POSTING</div>
+                        <div class="col-md-10" id="tgl"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -291,6 +295,7 @@
                     },
                     success: function(data)
                     {
+                        var tgl = (data.created_at !== '0000-00-00' && data.created_at !== null) ? tgl_indo(data.created_at) : '';
                         var fileUrl = base_url +'uploads/img/alumni/'+ data.gambar;
                         check_file_exists(fileUrl, function(exists)
                         {
@@ -314,6 +319,7 @@
                         $("#email").html(': ' + data.email);
                         $("#alamat").html(': ' + data.alamat);
                         $("#kesan").html(': ' + data.kesan);
+                        $("#tgl").html(': ' + tgl);
                         $('#modal_form').modal('show'); 
                     },
                     error: function (request)
@@ -377,6 +383,34 @@
             });
         }
 
+        function check_file_exists(url, callback)
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.open('HEAD', url, true);
+            xhr.onreadystatechange = function()
+            {
+                if(xhr.readyState === 4)
+                {
+                    if(xhr.status === 200)
+                    {
+                        callback(true);
+                    }else
+                    {
+                        callback(false);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        function tgl_indo(tgl)
+        {
+            var tanggal = tgl.substr(8,2);
+            var bulan = get_bulan(tgl.substr(5,2));
+            var tahun = tgl.substr(0,4);
+            return tanggal+' '+bulan+' '+tahun;
+        }
+
         function get_bulan(bln)
         {
             var bulan;
@@ -422,24 +456,16 @@
             return bulan;
         }
 
-        function check_file_exists(url, callback)
+        function alert_gagal(str)
         {
-            var xhr = new XMLHttpRequest();
-            xhr.open('HEAD', url, true);
-            xhr.onreadystatechange = function()
-            {
-                if(xhr.readyState === 4)
-                {
-                    if(xhr.status === 200)
-                    {
-                        callback(true);
-                    }else
-                    {
-                        callback(false);
-                    }
-                }
-            };
-            xhr.send();
+            setTimeout(function () { 
+                swal({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: str,
+                    timer: 8000
+                });
+            },2000); 
         }
     </script>
 <?= $this->endSection(); ?>
