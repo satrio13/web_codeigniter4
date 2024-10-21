@@ -41,6 +41,7 @@
                                     <thead class="bg-secondary text-center">
                                     <tr>
                                         <th width="5%">NO</th>
+                                        <th>TANGGAL</th>
                                         <th>NAMA</th>
                                         <th>STATUS</th>
                                         <th>URAIAN PENGADUAN</th>
@@ -76,12 +77,13 @@
 
                                         echo '<tr>
                                                 <td class="text-center">'.$no++.'</td>
+                                                <td>'.date('d-m-Y', strtotime($r->created_at)).'</td>
                                                 <td>'.$r->nama.'</td>
                                                 <td>'.$status.'</td>
                                                 <td>'.$pengaduan.'</td>
                                                 <td class="text-center" nowrap>
-                                                    <a href="javascript:void(0)" onclick="detail('.$r->id.')" class="btn btn-primary btn-xs" title="LIHAT DETAIL">DETAIL</a>
-                                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#konfirmasi_hapus" data-href="'.base_url("backend/hapus-pengaduan/$r->id").'" title="HAPUS DATA">HAPUS</a>
+                                                    <a href="javascript:void(0)" onclick="detail('.$r->id.')" class="btn btn-primary btn-xs" title="LIHAT DETAIL"><i class="fa fa-eye"></i> DETAIL</a>
+                                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#konfirmasi_hapus" data-href="'.base_url("backend/hapus-pengaduan/$r->id").'" title="HAPUS DATA"><i class="fa fa-trash"></i> HAPUS</a>
                                                 </td>
                                             </tr>';
                                     endforeach; 
@@ -117,7 +119,11 @@
                 </div>
                 <div class="modal-body">
                     <div id="load" class="text-center"></div>
-                    <div class="row">
+                    <div class="row mt-2">
+                        <div class="col-md-2 text-bold">Tanggal</div>
+                        <div class="col-md-10" id="tanggal"></div>
+                    </div>
+                    <div class="row mt-2">
                         <div class="col-md-2 text-bold">Nama</div>
                         <div class="col-md-10" id="nama"></div>
                     </div>
@@ -197,6 +203,8 @@
                     },
                     success: function(data)
                     {
+                        var created_at = (data.created_at !== '0000-00-00' && data.created_at !== null) ? tgl_indo(data.created_at) : '';
+
                         var status;
                         if(data.status == '1')
                         {
@@ -213,6 +221,7 @@
                         }
 
                         $("#load").html('');
+                        $('#tanggal').html(': ' + created_at);
                         $('#nama').html(': ' + data.nama);               
                         $('#status').html(': ' + status);    
                         $('#pengaduan').html(': ' + data.isi);    
@@ -224,6 +233,71 @@
                     }
                 });
             });
+        }
+
+        function tgl_indo(tgl)
+        {
+            var tanggal = tgl.substr(8,2);
+            var bulan = get_bulan(tgl.substr(5,2));
+            var tahun = tgl.substr(0,4);
+            return tanggal+' '+bulan+' '+tahun;
+        }
+
+        function get_bulan(bln)
+        {
+            var bulan;
+            switch(bln)
+            {
+                case '01':
+                    bulan = 'Januari';
+                    break;
+                case '02':
+                    bulan = 'Februari';
+                    break;
+                case '03':
+                    bulan = 'Maret';
+                    break;
+                case '04':
+                    bulan = 'April';
+                    break;
+                case '05':
+                    bulan = 'Mei';
+                    break;
+                case '06':
+                    bulan = 'Juni';
+                    break;
+                case '07':
+                    bulan = 'Juli';
+                    break;
+                case '08':
+                    bulan = 'Agustus';
+                    break;
+                case '09':
+                    bulan = 'September';
+                    break;
+                case '10':
+                    bulan = 'Oktober';
+                    break;
+                case '11':
+                    bulan = 'November';
+                    break;
+                case '12':
+                    bulan = 'Desember';
+                    break;
+            } 
+            return bulan;
+        }
+
+        function alert_gagal(str)
+        {
+            setTimeout(function () { 
+                swal({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: str,
+                    timer: 8000
+                });
+            },2000); 
         }
     </script>
 <?= $this->endSection(); ?>
