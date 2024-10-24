@@ -93,7 +93,7 @@
                                                 <td>'.$r->alamat.'</td>
                                                 <td>'.$kesan.'</td>
                                                 <td class="text-center">'.$img.'</td>
-                                                <td>'.date('d-m-Y', strtotime($r->created_at)).'</td>
+                                                <td>'.date('d-m-Y H:i:s', strtotime($r->created_at)).'</td>
                                                 <td class="text-center">
                                                     <a href="javascript:void(0)" onclick="detail('.$r->id.')" class="btn btn-primary btn-xs" title="LIHAT DETAIL">DETAIL</a>
                                                     <a href="javascript:void(0)" onclick="status('.$r->id.')" class="btn btn-info btn-xs">EDIT STATUS</a>
@@ -295,7 +295,8 @@
                     },
                     success: function(data)
                     {
-                        var tgl = (data.created_at !== '0000-00-00' && data.created_at !== null) ? tgl_indo(data.created_at) : '';
+                        var date = new Date(data.created_at); // Membuat objek Date
+                        var created_at = format_date(date); 
                         var fileUrl = base_url +'uploads/img/alumni/'+ data.gambar;
                         check_file_exists(fileUrl, function(exists)
                         {
@@ -319,7 +320,7 @@
                         $("#email").html(': ' + data.email);
                         $("#alamat").html(': ' + data.alamat);
                         $("#kesan").html(': ' + data.kesan);
-                        $("#tgl").html(': ' + tgl);
+                        $("#tgl").html(': ' + created_at);
                         $('#modal_form').modal('show'); 
                     },
                     error: function (request)
@@ -403,57 +404,16 @@
             xhr.send();
         }
 
-        function tgl_indo(tgl)
+        function format_date(date)
         {
-            var tanggal = tgl.substr(8,2);
-            var bulan = get_bulan(tgl.substr(5,2));
-            var tahun = tgl.substr(0,4);
-            return tanggal+' '+bulan+' '+tahun;
-        }
+            var day = date.getDate().toString().padStart(2, '0'); 
+            var month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+            var year = date.getFullYear();
+            var hours = date.getHours().toString().padStart(2, '0'); 
+            var minutes = date.getMinutes().toString().padStart(2, '0'); 
+            var seconds = date.getSeconds().toString().padStart(2, '0'); 
 
-        function get_bulan(bln)
-        {
-            var bulan;
-            switch(bln)
-            {
-                case '01':
-                    bulan = 'Januari';
-                    break;
-                case '02':
-                    bulan = 'Februari';
-                    break;
-                case '03':
-                    bulan = 'Maret';
-                    break;
-                case '04':
-                    bulan = 'April';
-                    break;
-                case '05':
-                    bulan = 'Mei';
-                    break;
-                case '06':
-                    bulan = 'Juni';
-                    break;
-                case '07':
-                    bulan = 'Juli';
-                    break;
-                case '08':
-                    bulan = 'Agustus';
-                    break;
-                case '09':
-                    bulan = 'September';
-                    break;
-                case '10':
-                    bulan = 'Oktober';
-                    break;
-                case '11':
-                    bulan = 'November';
-                    break;
-                case '12':
-                    bulan = 'Desember';
-                    break;
-            } 
-            return bulan;
+            return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
         }
 
         function alert_gagal(str)
