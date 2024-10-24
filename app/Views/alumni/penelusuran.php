@@ -138,30 +138,31 @@
         <div class="table table-responsive">
             <table class="table table-bordered table-striped table-sm" id="datatable">
                 <thead class="bg-theme text-white text-center">
-                <tr>
-                    <th width="5%">No</th>
-                    <th>Nama</th>
-                    <th>Tahun Lulus</th>
-                    <?php 
-                    if(jenjang() == 1 OR jenjang() == 3)
-                    { 
-                        echo'<th>SMA / SMK / MA</th>';
-                        echo'<th>Perguruan Tinggi</th>';
-                    }elseif(jenjang() == 2 OR jenjang() == 4)
-                    { 
-                        echo'<th>Perguruan Tinggi</th>';
-                    }
-                    ?>
-                    <th>Instansi</th>
-                    <th>Alamat Instansi</th>
-                    <th>No Hp</th>
-                    <th>Email</th>
-                    <th>Alamat</th>
-                    <th>Kesan</th>
-                    <th>Gambar</th>
-                </tr>
+                    <tr>
+                        <th width="5%">No</th>
+                        <th nowrap>Nama</th>
+                        <th nowrap>Tahun Lulus</th>
+                        <?php 
+                        if(jenjang() == 1 OR jenjang() == 3)
+                        { 
+                            echo'<th nowrap>SMA / SMK / MA</th>';
+                            echo'<th nowrap>Perguruan Tinggi</th>';
+                        }elseif(jenjang() == 2 OR jenjang() == 4)
+                        { 
+                            echo'<th nowrap>Perguruan Tinggi</th>';
+                        }
+                        ?>
+                        <th nowrap>Instansi</th>
+                        <th nowrap>Alamat Instansi</th>
+                        <th nowrap>No Hp</th>
+                        <th nowrap>Email</th>
+                        <th nowrap>Alamat</th>
+                        <th nowrap>Kesan</th>
+                        <th nowrap>Gambar</th>
+                        <th nowrap>Tgl Mengisi</th>
+                    </tr>
                 </thead>
-                </tbody>
+                <tbody>
                 <?php
                 $no = 1;
                 foreach($data as $r):
@@ -193,6 +194,7 @@
                             <td>'.cetak($r->alamat).'</td>
                             <td>'.cetak($r->kesan).'</td>
                             <td class="text-center">'.$img.'</td>
+                            <td>'.date('d-m-Y H:i:s', strtotime($r->created_at)).'</td>
                         </tr>';
                 endforeach;
                 ?>
