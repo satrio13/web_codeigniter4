@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito&display=swap">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/owl-carousel/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/owl-carousel/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/select2/select2.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/AdminLTE-3.0.2/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/magnific-popup.css">
@@ -273,7 +272,6 @@
 <script src="<?= base_url(); ?>assets/js/jquery-3.4.1.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/custom.js"></script>
 <script src="<?= base_url(); ?>assets/bootstrap-4.4.1/js/bootstrap.min.js"></script>
-<script src="<?= base_url(); ?>assets/select2/select2.min.js"></script>
 <script src="<?= base_url(); ?>assets/AdminLTE-3.0.2/plugins/datatables/jquery.dataTables.js"></script>
 <script src="<?= base_url(); ?>assets/AdminLTE-3.0.2/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="<?= base_url(); ?>assets/owl-carousel/js/owl.carousel.min.js"></script>
