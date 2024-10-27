@@ -360,27 +360,30 @@
 
         function save_status()
         {
-            $('#btnSave').text('saving...'); //change button text
-            $('#btnSave').attr('disabled',true); //set button disable 
+            cek_session(function()
+            {
+                $('#btnSave').text('saving...'); //change button text
+                $('#btnSave').attr('disabled',true); //set button disable 
 
-            $.ajax({
-                url : base_url + "backend/save-status",
-                type: "POST",
-                data: $('#form').serialize(),
-                dataType: "JSON",
-                success: function(data)
-                {   
-                    $('#modal_status').modal('hide');
-                    window.location.replace("<?= base_url('backend/penelusuran-alumni'); ?>");
-                    $('#btnSave').html('<i class="fa fa-check"></i> SIMPAN'); //change button text
-                    $('#btnSave').attr('disabled',false); //set button enable 
-                },
-                error: function (request)
-                {
-                    alert('An error occurred during your request: '+  request.status + ' ' + request.statusText + 'Please Try Again!!');
-                    $('#btnSave').html('<i class="fa fa-check"></i> SIMPAN'); //change button text
-                    $('#btnSave').attr('disabled',false); //set button enable 
-                }
+                $.ajax({
+                    url : base_url + "backend/save-status",
+                    type: "POST",
+                    data: $('#form').serialize(),
+                    dataType: "JSON",
+                    success: function(data)
+                    {   
+                        $('#modal_status').modal('hide');
+                        window.location.replace("<?= base_url('backend/penelusuran-alumni'); ?>");
+                        $('#btnSave').html('<i class="fa fa-check"></i> SIMPAN'); //change button text
+                        $('#btnSave').attr('disabled',false); //set button enable 
+                    },
+                    error: function (request)
+                    {
+                        alert('An error occurred during your request: '+  request.status + ' ' + request.statusText + 'Please Try Again!!');
+                        $('#btnSave').html('<i class="fa fa-check"></i> SIMPAN'); //change button text
+                        $('#btnSave').attr('disabled',false); //set button enable 
+                    }
+                });
             });
         }
 
