@@ -31,12 +31,13 @@
                     {
                         $no = 1; 
                         foreach($data as $r):
+                            $total = $r->jml_l + $r->jml_p;
                             echo'<tr>
                                     <td class="text-center">'.$no++.'</td>
                                     <td>'.$r->tahun.'</td>
                                     <td class="text-right">'.$r->jml_l.'</td>
                                     <td class="text-right">'.$r->jml_p.'</td>
-                                    <td class="text-right">'.$r->jml_l + $r->jml_p.'</td>
+                                    <td class="text-right">'.$total.'</td>
                                 </tr>';
                         endforeach;
                     }else
