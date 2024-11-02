@@ -127,8 +127,6 @@ class Pengumuman extends BaseController
             'gambar' => $nama_gambar,
             'id_user' => session('id_user'),
             'is_active' => esc($this->request->getVar('is_active')),
-            'hari' => hari_ini_indo(),
-            'tgl' => tgl_jam_simpan_sekarang(),
             'slug' => slug(esc($this->request->getVar('nama')))
         ];
         
