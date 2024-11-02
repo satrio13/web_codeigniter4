@@ -16,7 +16,7 @@ class AlbumModel extends Model
 
     function list_album($page)
     {
-        return $this->where('is_active', 1)->orderBy('updated_at','desc')->paginate($page);
+        return $this->where('is_active', 1)->orderBy('created_at','desc')->paginate($page);
     }
 
     function cek_album($slug)
@@ -31,7 +31,7 @@ class AlbumModel extends Model
 
     function tampil_foto($slug)
     {
-        return $this->db->table('tb_foto f')->select('f.id_foto,f.id_album,f.foto,f.updated_at,a.album,a.updated_at,a.is_active,a.slug')->join('tb_album a','f.id_album=a.id_album')->where('a.is_active',1)->where('a.slug',$slug)->orderBy('f.updated_at','desc')->get()->getResult();
+        return $this->db->table('tb_foto f')->select('f.id_foto,f.id_album,f.foto,f.created_at,a.album,a.created_at,a.is_active,a.slug')->join('tb_album a','f.id_album=a.id_album')->where('a.is_active',1)->where('a.slug',$slug)->orderBy('f.created_at','desc')->get()->getResult();
     }
 
 }
