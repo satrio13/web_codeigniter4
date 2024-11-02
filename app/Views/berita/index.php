@@ -71,8 +71,8 @@
                                         <h5>
                                             <a href="'.base_url("berita/detail/$r->slug").'" class="text-decoration-none judul_link"><b>'.$r->nama.'</b></a>
                                         </h5>
-                                        <span class="badge badge-primary"><i class="fa fa-calendar"></i> '.tgl_indo($r->updated_at).'</span>
-                                        <span class="badge badge-danger"><i class="fa fa-clock-o"></i> '.date('H:i', strtotime($r->updated_at)).'</span> 
+                                        <span class="badge badge-primary"><i class="fa fa-calendar"></i> '.tgl_indo($r->created_at).'</span>
+                                        <span class="badge badge-danger"><i class="fa fa-clock-o"></i> '.date('H:i', strtotime($r->created_at)).'</span> 
                                         <hr>
                                         <p>'.$isi.'</p>
                                         <div class="text-right">
