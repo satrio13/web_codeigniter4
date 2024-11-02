@@ -8,7 +8,7 @@ class AlumniModel extends Model
 {
     function list_isialumni()
     {
-        return $this->db->table('tb_isialumni')->where('status', 1)->orderBy('updated_at','desc')->get()->getResult();
+        return $this->db->table('tb_isialumni')->where('status', 1)->orderBy('created_at','desc')->get()->getResult();
     }
 
     function list_alumni()
