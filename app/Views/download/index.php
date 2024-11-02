@@ -34,7 +34,7 @@
                             echo'<tr>
                                     <td class="text-center">'.$no++.'</td>
                                     <td>'.$r->nama_file.'</td>
-                                    <td>'.date('d-m-Y', strtotime($r->updated_at)).'</td>
+                                    <td>'.date('d-m-Y', strtotime($r->created_at)).'</td>
                                     <td class="text-center">'.$r->hits.'</td>
                                     <td class="text-center">
                                         <a href="'.base_url("download/hits/$r->file").'" class="btn bg-theme btn-sm"><i class="fa fa-download text-white"></i></a>
