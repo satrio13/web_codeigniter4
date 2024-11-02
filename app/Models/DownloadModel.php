@@ -16,7 +16,7 @@ class DownloadModel extends Model
 
     function list_download()
     {
-        return $this->where('is_active',1)->orderBy('updated_at','desc')->get()->getResult();
+        return $this->where('is_active',1)->orderBy('created_at','desc')->get()->getResult();
     }
 
     function cek_download($file)
