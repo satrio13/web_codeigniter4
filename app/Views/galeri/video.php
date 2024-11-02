@@ -26,7 +26,7 @@
                                 <small>'.$r->keterangan.'</small>
                             </div>
                             <div class="card-footer">
-                                <small>Waktu Upload: <i class="fa fa-calendar"></i> '.tgl_indo($r->updated_at).' <i class="fa fa-clock-o"></i> '.date('H:i', strtotime($r->updated_at)).' WIB</small>
+                                <small>Waktu Upload: <i class="fa fa-calendar"></i> '.tgl_indo($r->created_at).' <i class="fa fa-clock-o"></i> '.date('H:i', strtotime($r->created_at)).' WIB</small>
                             </div>
                         </div>
                     </div>';
