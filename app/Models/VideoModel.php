@@ -16,7 +16,7 @@ class VideoModel extends Model
 
     function list_video($page)
     {
-        return $this->orderBy('updated_at','desc')->paginate($page);
+        return $this->orderBy('created_at','desc')->paginate($page);
     }
 
 }
