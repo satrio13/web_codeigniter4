@@ -35,7 +35,7 @@
                                 <a href="'.base_url("galeri/album/$r->slug").'" class="card-text judul_link text-decoration-none"><b>'.$r->album.'</b></a>
                             </div>
                             <div class="card-footer">
-                                <small><i class="fa fa-calendar"></i> '.tgl_indo($r->updated_at).' | <i class="fa fa-folder-open"></i>'. jml_foto($r->id_album).' Foto</small>
+                                <small><i class="fa fa-calendar"></i> '.tgl_indo($r->created_at).' | <i class="fa fa-folder-open"></i>'. jml_foto($r->id_album).' Foto</small>
                             </div>
                         </div>
                     </div>';
